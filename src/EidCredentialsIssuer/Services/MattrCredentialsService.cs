@@ -88,11 +88,10 @@ namespace EidCredentialsIssuer
                     new ClaimMappings{ JsonLdTerm="family_name", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/family_name"},
                     new ClaimMappings{ JsonLdTerm="given_name", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/given_name"},
                     new ClaimMappings{ JsonLdTerm="date_of_birth", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/date_of_birth"},
-                    new ClaimMappings{ JsonLdTerm="medicinal_product_code", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/medicinal_product_code"},
-                    new ClaimMappings{ JsonLdTerm="number_of_doses", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/number_of_doses"},
-                    new ClaimMappings{ JsonLdTerm="total_number_of_doses", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/total_number_of_doses"},
-                    new ClaimMappings{ JsonLdTerm="vaccination_date", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/vaccination_date"},
-                    new ClaimMappings{ JsonLdTerm="country_of_vaccination", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/country_of_vaccination"}
+                    new ClaimMappings{ JsonLdTerm="birth_place", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/birth_place"},
+                    new ClaimMappings{ JsonLdTerm="height", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/height"},
+                    new ClaimMappings{ JsonLdTerm="nationality", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/nationality"},
+                    new ClaimMappings{ JsonLdTerm="gender", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/gender"}
                 },
                 FederatedProvider = new FederatedProvider
                 {

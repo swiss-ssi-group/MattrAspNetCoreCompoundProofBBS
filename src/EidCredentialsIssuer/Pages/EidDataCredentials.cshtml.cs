@@ -31,20 +31,18 @@ namespace EidCredentialsIssuer.Pages
             var familyNameClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/family_name");
             var givenNameClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/given_name");
             var dateOfBirthClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/date_of_birth");
-            var medicinalProductCodeClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/medicinal_product_code");
-            var numberOfDosesClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/number_of_doses");
-            var totalNumberOfDosesClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/total_number_of_doses");
-            var vaccinationDateClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/vaccination_date");
-            var countryOfVaccinationClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/country_of_vaccination");
-
+            var birthPlace = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/birth_place");
+            var heightClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/height");
+            var nationalityClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/nationality");
+            var genderClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/gender");
+         
             if (familyNameClaim == null
                 || givenNameClaim == null
                 || dateOfBirthClaim == null
-                || medicinalProductCodeClaim == null
-                || numberOfDosesClaim == null
-                || totalNumberOfDosesClaim == null
-                || vaccinationDateClaim == null
-                || countryOfVaccinationClaim == null)
+                || birthPlace == null
+                || heightClaim == null
+                || nationalityClaim == null
+                || genderClaim == null)
             {
                 identityHasEidDataClaims = false;
             }
@@ -56,11 +54,10 @@ namespace EidCredentialsIssuer.Pages
                     FamilyName = familyNameClaim.Value,
                     GivenName = givenNameClaim.Value,
                     DateOfBirth = dateOfBirthClaim.Value,
-                    MedicinalProductCode = medicinalProductCodeClaim.Value,
-                    NumberOfDoses = numberOfDosesClaim.Value,
-                    TotalNumberOfDoses = totalNumberOfDosesClaim.Value,
-                    VaccinationDate = vaccinationDateClaim.Value,
-                    CountryOfVaccination = countryOfVaccinationClaim.Value
+                    BirthPlace = birthPlace.Value,
+                    Height = heightClaim.Value,
+                    Nationality = nationalityClaim.Value,
+                    Gender = genderClaim.Value
                 };
                 // get per name
                 //var offerUrl = await _eidCredentialsIssuerCredentialsService.GetLastVaccinationDataCredentialIssuerUrl("ndlseven");
