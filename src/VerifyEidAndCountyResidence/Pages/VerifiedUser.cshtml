@@ -1,0 +1,44 @@
+﻿@page "{handler?}"
+@model VerifyEidAndCountyResidence.Pages.VerifiedUserModel
+@{
+}
+
+<h1>Vaccination Data verified</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm">
+            <div>
+                <img src="~/pexels-artem-podrez-5878503.jpg" width="100" alt="Vaccine" />
+                <div>
+                    <b>Verified Vaccination Data for:@Html.DisplayFor(model => model.VerifiedVaccinationDataClaims.GivenName) @Html.DisplayFor(model => model.VerifiedVaccinationDataClaims.FamilyName)</b>
+                    <hr />
+                    <dl class="row">
+                        @*<dt class="col-sm-4">Vaccinated in @Model.VerifiedVaccinationDataClaims.CountryOfVaccination on:</dt>
+                        <dd class="col-sm-8">
+                            @Model.VerifiedVaccinationDataClaims.VaccinationDate
+                        </dd>*@
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.VerifiedVaccinationDataClaims.MedicinalProductCode)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.VerifiedVaccinationDataClaims.MedicinalProductCode)
+                        </dd>
+                        <dt class="col-sm-4">Date of Birth</dt>
+                        <dd class="col-sm-8">
+                            @Model.VerifiedVaccinationDataClaims.DateOfBirth
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+       
+        <div class="col-sm">
+            <img src="~/check-mark-icon-vector.jpg"  width="200" />         
+            <dl class="row">
+                <dt class="col-sm-12">Vaccinated</dt>
+
+            </dl>
+            <button class="btn btn-outline-primary">Success</button>
+        </div>
+    </div>
+</div>
