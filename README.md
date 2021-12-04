@@ -1,6 +1,6 @@
 [![.NET](https://github.com/swiss-ssi-group/MattrZeroKnowledgeProofsAspNetCore/actions/workflows/dotnet.yml/badge.svg)](https://github.com/swiss-ssi-group/MattrZeroKnowledgeProofsAspNetCore/actions/workflows/dotnet.yml)
 
-# MATTR Global ASP.NET Core
+# Mattr ASP.NET Core Compound Proof BBS+ demo
 
 ## Blogs
 
@@ -123,13 +123,13 @@ function (user, context, callback) {
 ### Console
 
 ```
-dotnet ef migrations add vaccine_vc_issuer_init
+dotnet ef migrations add vc_issuer_init
 ```
 
 ### Powershell
 
 ```
-Add-Migration "vaccine_vc_issuer_init"
+Add-Migration "vc_issuer_init"
 ```
 
 ## Running Migrations
@@ -139,7 +139,9 @@ Add-Migration "vaccine_vc_issuer_init"
 ```
 dotnet restore
 
-dotnet ef database update --context VaccineCredentialsIssuerMattrContext
+dotnet ef database update --context CountyResidenceDataMattrContext
+
+dotnet ef database update --context EidDataMattrContext
 ```
 
 ### Powershell
