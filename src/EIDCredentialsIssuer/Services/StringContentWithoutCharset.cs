@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Text;
 
-namespace VaccineCredentialsIssuer.Services
+namespace EidCredentialsIssuer.Services
 {
     public class StringContentWithoutCharset : StringContent
     {

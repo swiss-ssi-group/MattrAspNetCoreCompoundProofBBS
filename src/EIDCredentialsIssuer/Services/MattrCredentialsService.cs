@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using VaccineCredentialsIssuer.Data;
-using VaccineCredentialsIssuer.MattrOpenApiClient;
-using VaccineCredentialsIssuer.Services;
+using EidCredentialsIssuer.Data;
+using EidCredentialsIssuer.MattrOpenApiClient;
+using EidCredentialsIssuer.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,24 +10,24 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace VaccineCredentialsIssuer
+namespace EidCredentialsIssuer
 {
     public class MattrCredentialsService
     {
         private readonly IConfiguration _configuration;
-        private readonly VaccineCredentialsIssuerCredentialsService _vaccineCredentialsIssuerCredentialsService;
+        private readonly EidCredentialsIssuerCredentialsService _EidCredentialsIssuerCredentialsService;
         private readonly IHttpClientFactory _clientFactory;
         private readonly MattrTokenApiService _mattrTokenApiService;
         private readonly MattrConfiguration _mattrConfiguration;
 
         public MattrCredentialsService(IConfiguration configuration,
-            VaccineCredentialsIssuerCredentialsService vaccineCredentialsIssuerCredentialsService,
+            EidCredentialsIssuerCredentialsService EidCredentialsIssuerCredentialsService,
             IHttpClientFactory clientFactory,
             IOptions<MattrConfiguration> mattrConfiguration,
             MattrTokenApiService mattrTokenApiService)
         {
             _configuration = configuration;
-            _vaccineCredentialsIssuerCredentialsService = vaccineCredentialsIssuerCredentialsService;
+            _EidCredentialsIssuerCredentialsService = EidCredentialsIssuerCredentialsService;
             _clientFactory = clientFactory;
             _mattrTokenApiService = mattrTokenApiService;
             _mattrConfiguration = mattrConfiguration.Value;
@@ -38,7 +38,7 @@ namespace VaccineCredentialsIssuer
             // create a new one
             var vaccinationDataCredentials = await CreateMattrDidAndCredentialIssuer();
             vaccinationDataCredentials.Name = name;
-            await _vaccineCredentialsIssuerCredentialsService.CreateVaccinationData(vaccinationDataCredentials);
+            await _EidCredentialsIssuerCredentialsService.CreateVaccinationData(vaccinationDataCredentials);
 
             var callback = $"https://{_mattrConfiguration.TenantSubdomain}/ext/oidc/v1/issuers/{vaccinationDataCredentials.OidcIssuerId}/federated/callback";
             return callback;

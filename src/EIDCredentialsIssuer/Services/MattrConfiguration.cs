@@ -1,4 +1,4 @@
-﻿namespace VaccineCredentialsIssuer.Services
+﻿namespace EidCredentialsIssuer.Services
 {
     public class MattrConfiguration
     {

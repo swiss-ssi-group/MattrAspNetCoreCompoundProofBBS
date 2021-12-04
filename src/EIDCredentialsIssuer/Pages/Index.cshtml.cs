@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace VaccineCredentialsIssuer.Pages
+namespace EidCredentialsIssuer.Pages
 {
     [Authorize]
     public class IndexModel : PageModel

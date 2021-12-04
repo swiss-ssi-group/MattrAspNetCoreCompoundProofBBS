@@ -2,14 +2,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 using System.Linq;
 using System.Threading.Tasks;
-using VaccineCredentialsIssuer.Data;
-using VaccineCredentialsIssuer.Services;
+using EidCredentialsIssuer.Data;
+using EidCredentialsIssuer.Services;
 
-namespace VaccineCredentialsIssuer.Pages
+namespace EidCredentialsIssuer.Pages
 {
     public class VaccinationDataCredentialsModel : PageModel
     {
-        private readonly VaccineCredentialsIssuerCredentialsService _vaccineCredentialsIssuerCredentialsService;
+        private readonly EidCredentialsIssuerCredentialsService _EidCredentialsIssuerCredentialsService;
         private readonly MattrConfiguration _mattrConfiguration;
 
         public string VaccinationDataMessage { get; set; } = "Loading credentials";
@@ -17,10 +17,10 @@ namespace VaccineCredentialsIssuer.Pages
         public VaccinationData VaccinationData { get; set; }
         public string CredentialOfferUrl { get; set; }
         public VaccinationDataCredentialsModel(
-            VaccineCredentialsIssuerCredentialsService vaccineCredentialsIssuerCredentialsService,
+            EidCredentialsIssuerCredentialsService EidCredentialsIssuerCredentialsService,
             IOptions<MattrConfiguration> mattrConfiguration)
         {
-            _vaccineCredentialsIssuerCredentialsService = vaccineCredentialsIssuerCredentialsService;
+            _EidCredentialsIssuerCredentialsService = EidCredentialsIssuerCredentialsService;
             _mattrConfiguration = mattrConfiguration.Value;
         }
         public async Task OnGetAsync()
@@ -63,10 +63,10 @@ namespace VaccineCredentialsIssuer.Pages
                     CountryOfVaccination = countryOfVaccinationClaim.Value
                 };
                 // get per name
-                //var offerUrl = await _vaccineCredentialsIssuerCredentialsService.GetLastVaccinationDataCredentialIssuerUrl("ndlseven");
+                //var offerUrl = await _EidCredentialsIssuerCredentialsService.GetLastVaccinationDataCredentialIssuerUrl("ndlseven");
 
                 // get the last one
-                var offerUrl = await _vaccineCredentialsIssuerCredentialsService.GetLastVaccinationDataCredentialIssuerUrl();
+                var offerUrl = await _EidCredentialsIssuerCredentialsService.GetLastVaccinationDataCredentialIssuerUrl();
 
                 VaccinationDataMessage = "Add your vaccination data credentials to your wallet";
                 CredentialOfferUrl = offerUrl;

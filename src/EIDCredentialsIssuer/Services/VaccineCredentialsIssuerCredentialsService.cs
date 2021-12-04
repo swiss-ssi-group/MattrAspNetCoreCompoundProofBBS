@@ -1,29 +1,29 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using VaccineCredentialsIssuer.Data;
-using VaccineCredentialsIssuer.MattrOpenApiClient;
-using VaccineCredentialsIssuer.Services;
+using EidCredentialsIssuer.Data;
+using EidCredentialsIssuer.MattrOpenApiClient;
+using EidCredentialsIssuer.Services;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace VaccineCredentialsIssuer
+namespace EidCredentialsIssuer
 {
-    public class VaccineCredentialsIssuerCredentialsService
+    public class EidCredentialsIssuerCredentialsService
     {
-        private readonly VaccinationDataMattrContext _VaccineCredentialsIssuerMattrContext;
+        private readonly VaccinationDataMattrContext _EidCredentialsIssuerMattrContext;
         private readonly MattrConfiguration _mattrConfiguration;
 
-        public VaccineCredentialsIssuerCredentialsService(VaccinationDataMattrContext VaccineCredentialsIssuerMattrContext,
+        public EidCredentialsIssuerCredentialsService(VaccinationDataMattrContext EidCredentialsIssuerMattrContext,
             IOptions<MattrConfiguration> mattrConfiguration)
         {
-            _VaccineCredentialsIssuerMattrContext = VaccineCredentialsIssuerMattrContext;
+            _EidCredentialsIssuerMattrContext = EidCredentialsIssuerMattrContext;
             _mattrConfiguration = mattrConfiguration.Value;
         }
 
         public async Task<(string Callback, string DidId)> GetLastVaccineCredentialIssuer()
         {
-            var vaccinationDataCredentials = await _VaccineCredentialsIssuerMattrContext
+            var vaccinationDataCredentials = await _EidCredentialsIssuerMattrContext
                 .VaccinationDataCredentials
                 .OrderBy(u => u.Id)
                 .LastOrDefaultAsync();
@@ -40,7 +40,7 @@ namespace VaccineCredentialsIssuer
 
         public async Task<string> GetLastVaccinationDataCredentialIssuerUrl()
         {
-            var vaccinationData = await _VaccineCredentialsIssuerMattrContext
+            var vaccinationData = await _EidCredentialsIssuerMattrContext
                 .VaccinationDataCredentials
                 .OrderBy(u => u.Id)
                 .LastOrDefaultAsync();
@@ -56,7 +56,7 @@ namespace VaccineCredentialsIssuer
 
         public async Task<string> GetVaccinationDataCredentialIssuerUrl(string name)
         {
-            var vaccinationData = await _VaccineCredentialsIssuerMattrContext
+            var vaccinationData = await _EidCredentialsIssuerMattrContext
                 .VaccinationDataCredentials
                 .FirstOrDefaultAsync(dl => dl.Name == name);
 
@@ -71,8 +71,8 @@ namespace VaccineCredentialsIssuer
 
         public async Task CreateVaccinationData(VaccinationDataCredentials vaccinationDataCredentials)
         {
-            _VaccineCredentialsIssuerMattrContext.VaccinationDataCredentials.Add(vaccinationDataCredentials);
-            await _VaccineCredentialsIssuerMattrContext.SaveChangesAsync();
+            _EidCredentialsIssuerMattrContext.VaccinationDataCredentials.Add(vaccinationDataCredentials);
+            await _EidCredentialsIssuerMattrContext.SaveChangesAsync();
         }
     }
 }

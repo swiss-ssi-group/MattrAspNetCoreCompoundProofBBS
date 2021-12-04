@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace VaccineCredentialsIssuer.Pages
+namespace EidCredentialsIssuer.Pages
 {
     public class AdminModel : PageModel
     {

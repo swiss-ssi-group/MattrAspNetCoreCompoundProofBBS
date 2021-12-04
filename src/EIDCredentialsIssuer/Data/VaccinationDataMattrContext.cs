@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace VaccineCredentialsIssuer.Data
+namespace EidCredentialsIssuer.Data
 {
     public class VaccinationDataMattrContext : DbContext
     {

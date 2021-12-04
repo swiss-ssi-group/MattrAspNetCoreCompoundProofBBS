@@ -1,4 +1,4 @@
-﻿namespace VaccineCredentialsIssuer.Data
+﻿namespace EidCredentialsIssuer.Data
 {
     public class VaccinationData
     {

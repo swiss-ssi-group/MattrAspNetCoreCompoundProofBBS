@@ -5,16 +5,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using VaccineCredentialsIssuer.Services;
+using EidCredentialsIssuer.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using System.Threading.Tasks;
-using VaccineCredentialsIssuer.Data;
+using EidCredentialsIssuer.Data;
 using Microsoft.EntityFrameworkCore;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace VaccineCredentialsIssuer
+namespace EidCredentialsIssuer
 {
     public class Startup
     {
@@ -32,7 +32,7 @@ namespace VaccineCredentialsIssuer
             services.Configure<MattrConfiguration>(Configuration.GetSection("MattrConfiguration"));
             services.AddScoped<MattrTokenApiService>();
             services.AddScoped<MattrCredentialsService>();
-            services.AddScoped<VaccineCredentialsIssuerCredentialsService>();
+            services.AddScoped<EidCredentialsIssuerCredentialsService>();
 
             services.AddDbContext<VaccinationDataMattrContext>(options =>
                 options.UseSqlServer(

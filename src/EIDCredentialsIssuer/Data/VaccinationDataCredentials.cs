@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace VaccineCredentialsIssuer.Data
+namespace EidCredentialsIssuer.Data
 {
     public class VaccinationDataCredentials
     {

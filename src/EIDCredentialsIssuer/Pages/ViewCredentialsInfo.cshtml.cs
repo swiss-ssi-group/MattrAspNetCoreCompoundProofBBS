@@ -1,23 +1,23 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace VaccineCredentialsIssuer.Pages
+namespace EidCredentialsIssuer.Pages
 {
     public class ViewLastCredentialsInfoModel : PageModel
     {
-        private readonly VaccineCredentialsIssuerCredentialsService _vaccineCredentialsIssuerCredentialsService;
+        private readonly EidCredentialsIssuerCredentialsService _EidCredentialsIssuerCredentialsService;
 
         public string LatestVaccinationDid { get; set; }
         public string LatestVaccinationDataCallback { get; set; }
 
         public string CredentialOfferUrl { get; set; }
-        public ViewLastCredentialsInfoModel(VaccineCredentialsIssuerCredentialsService vaccineCredentialsIssuerCredentialsService)
+        public ViewLastCredentialsInfoModel(EidCredentialsIssuerCredentialsService EidCredentialsIssuerCredentialsService)
         {
-            _vaccineCredentialsIssuerCredentialsService = vaccineCredentialsIssuerCredentialsService;
+            _EidCredentialsIssuerCredentialsService = EidCredentialsIssuerCredentialsService;
         }
         public async Task OnGetAsync()
         {
-            var credentialIssuer = await _vaccineCredentialsIssuerCredentialsService.GetLastVaccineCredentialIssuer();
+            var credentialIssuer = await _EidCredentialsIssuerCredentialsService.GetLastVaccineCredentialIssuer();
             LatestVaccinationDataCallback = credentialIssuer.Callback;
             LatestVaccinationDid = credentialIssuer.DidId;
         }
