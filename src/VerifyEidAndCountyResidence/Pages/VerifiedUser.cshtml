@@ -3,14 +3,14 @@
 @{
 }
 
-<h1>Vaccination Data verified</h1>
+<h1>E-ID and County Residence Data verified</h1>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm">
             <div>
                 <img src="~/pexels-artem-podrez-5878503.jpg" width="100" alt="Vaccine" />
                 <div>
-                    <b>Verified Vaccination Data for:@Html.DisplayFor(model => model.VerifiedVaccinationDataClaims.GivenName) @Html.DisplayFor(model => model.VerifiedVaccinationDataClaims.FamilyName)</b>
+                    <b>Verified E-ID and County Residence Data for:@Html.DisplayFor(model => model.VerifiedEidCountyResidenceDataClaims.GivenName) @Html.DisplayFor(model => model.VerifiedEidCountyResidenceDataClaims.FamilyName)</b>
                     <hr />
                     <dl class="row">
                         @*<dt class="col-sm-4">Vaccinated in @Model.VerifiedVaccinationDataClaims.CountryOfVaccination on:</dt>
@@ -18,14 +18,14 @@
                             @Model.VerifiedVaccinationDataClaims.VaccinationDate
                         </dd>*@
                         <dt class="col-sm-4">
-                            @Html.DisplayNameFor(model => model.VerifiedVaccinationDataClaims.MedicinalProductCode)
+                            @Html.DisplayNameFor(model => model.VerifiedEidCountyResidenceDataClaims.MedicinalProductCode)
                         </dt>
                         <dd class="col-sm-8">
-                            @Html.DisplayFor(model => model.VerifiedVaccinationDataClaims.MedicinalProductCode)
+                            @Html.DisplayFor(model => model.VerifiedEidCountyResidenceDataClaims.MedicinalProductCode)
                         </dd>
                         <dt class="col-sm-4">Date of Birth</dt>
                         <dd class="col-sm-8">
-                            @Model.VerifiedVaccinationDataClaims.DateOfBirth
+                            @Model.VerifiedEidCountyResidenceDataClaims.DateOfBirth
                         </dd>
                     </dl>
                 </div>
@@ -35,7 +35,7 @@
         <div class="col-sm">
             <img src="~/check-mark-icon-vector.jpg"  width="200" />         
             <dl class="row">
-                <dt class="col-sm-12">Vaccinated</dt>
+                <dt class="col-sm-12">E-ID and County Residence Verified</dt>
 
             </dl>
             <button class="btn btn-outline-primary">Success</button>

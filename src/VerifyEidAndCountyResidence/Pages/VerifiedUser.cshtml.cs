@@ -5,36 +5,36 @@ namespace VerifyEidAndCountyResidence.Pages
 {
     public class VerifiedUserModel : PageModel
     {
-        private readonly VerifyEidCountyResidenceDbService _VerifyEidAndCountyResidenceDbService;
+        private readonly VerifyEidCountyResidenceDbService _verifyEidCountyResidenceDbService;
 
-        public VerifiedUserModel(VerifyEidCountyResidenceDbService VerifyEidAndCountyResidenceDbService)
+        public VerifiedUserModel(VerifyEidCountyResidenceDbService verifyEidCountyResidenceDbService)
         {
-            _VerifyEidAndCountyResidenceDbService = VerifyEidAndCountyResidenceDbService;
+            _verifyEidCountyResidenceDbService = verifyEidCountyResidenceDbService;
         }
 
         public string ChallengeId { get; set; }
-        public VaccineVerifiedClaimsDto VerifiedVaccinationDataClaims { get; private set; }
+        public EidCountyResidenceVerifiedClaimsDto VerifiedEidCountyResidenceDataClaims { get; private set; }
 
         public async Task OnGetAsync(string challengeId)
         {
             // user query param to get challenge id and display data
             if (challengeId != null)
             {
-                var verifiedVaccinationDataUser = await _VerifyEidAndCountyResidenceDbService.GetVerifiedUser(challengeId);
-                VerifiedVaccinationDataClaims = new VaccineVerifiedClaimsDto
+                var verifiedDataUser = await _verifyEidCountyResidenceDbService.GetVerifiedUser(challengeId);
+                VerifiedEidCountyResidenceDataClaims = new EidCountyResidenceVerifiedClaimsDto
                 {
-                    DateOfBirth = verifiedVaccinationDataUser.DateOfBirth,
-                    MedicinalProductCode = verifiedVaccinationDataUser.MedicinalProductCode,
-                    FamilyName = verifiedVaccinationDataUser.FamilyName,
-                    GivenName = verifiedVaccinationDataUser.GivenName,
-                    VaccinationDate = verifiedVaccinationDataUser.VaccinationDate,
-                    CountryOfVaccination = verifiedVaccinationDataUser.CountryOfVaccination
+                    DateOfBirth = verifiedDataUser.DateOfBirth,
+                    MedicinalProductCode = verifiedDataUser.MedicinalProductCode,
+                    FamilyName = verifiedDataUser.FamilyName,
+                    GivenName = verifiedDataUser.GivenName,
+                    VaccinationDate = verifiedDataUser.VaccinationDate,
+                    CountryOfVaccination = verifiedDataUser.CountryOfVaccination
                 };
             }
         }
     }
 
-    public class VaccineVerifiedClaimsDto
+    public class EidCountyResidenceVerifiedClaimsDto
     {
         public string MedicinalProductCode { get; set; }
         public string GivenName { get; set; }
