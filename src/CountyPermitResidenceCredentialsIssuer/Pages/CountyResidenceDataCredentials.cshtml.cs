@@ -12,15 +12,15 @@ namespace CountyPermitResidenceCredentialsIssuer.Pages
         private readonly CountyPermitResidenceCredentialsIssuerCredentialsService _CountyPermitResidenceCredentialsIssuerCredentialsService;
         private readonly MattrConfiguration _mattrConfiguration;
 
-        public string EidDataMessage { get; set; } = "Loading credentials";
-        public bool HasEidData { get; set; } = false;
-        public CountyResidenceData EidData { get; set; }
+        public string CountyResidenceDataMessage { get; set; } = "Loading credentials";
+        public bool HasCountyResidenceData { get; set; } = false;
+        public CountyResidenceData CountyResidenceData { get; set; }
         public string CredentialOfferUrl { get; set; }
         public EidDataCredentialsModel(
-            CountyPermitResidenceCredentialsIssuerCredentialsService CountyPermitResidenceCredentialsIssuerCredentialsService,
+            CountyPermitResidenceCredentialsIssuerCredentialsService countyPermitResidenceCredentialsIssuerCredentialsService,
             IOptions<MattrConfiguration> mattrConfiguration)
         {
-            _CountyPermitResidenceCredentialsIssuerCredentialsService = CountyPermitResidenceCredentialsIssuerCredentialsService;
+            _CountyPermitResidenceCredentialsIssuerCredentialsService = countyPermitResidenceCredentialsIssuerCredentialsService;
             _mattrConfiguration = mattrConfiguration.Value;
         }
         public async Task OnGetAsync()
@@ -31,33 +31,36 @@ namespace CountyPermitResidenceCredentialsIssuer.Pages
             var familyNameClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/family_name");
             var givenNameClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/given_name");
             var dateOfBirthClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/date_of_birth");
-            var birthPlace = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/birth_place");
-            var heightClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/height");
-            var nationalityClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/nationality");
-            var genderClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/gender");
-         
+            var addressCountryClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/addressCountry");
+            var addressLocalityClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/address_locality");
+            var addressRegionClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/Address_region");
+            var streetAddressClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/street_address");
+            var postalCodeClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/postal_code");
+
             if (familyNameClaim == null
                 || givenNameClaim == null
                 || dateOfBirthClaim == null
-                || birthPlace == null
-                || heightClaim == null
-                || nationalityClaim == null
-                || genderClaim == null)
+                || addressCountryClaim == null
+                || addressLocalityClaim == null
+                || addressRegionClaim == null
+                || streetAddressClaim == null
+                || postalCodeClaim == null)
             {
                 identityHasEidDataClaims = false;
             }
 
             if (identityHasEidDataClaims)
             {
-                EidData = new CountyResidenceData
+                CountyResidenceData = new CountyResidenceData
                 {
                     FamilyName = familyNameClaim.Value,
                     GivenName = givenNameClaim.Value,
                     DateOfBirth = dateOfBirthClaim.Value,
-                    BirthPlace = birthPlace.Value,
-                    Height = heightClaim.Value,
-                    Nationality = nationalityClaim.Value,
-                    Gender = genderClaim.Value
+                    AddressCountry = addressCountryClaim.Value,
+                    AddressLocality = addressLocalityClaim.Value,
+                    AddressRegion = addressRegionClaim.Value,
+                    StreetAddress = streetAddressClaim.Value,
+                    PostalCode = postalCodeClaim.Value
                 };
                 // get per name
                 //var offerUrl = await _CountyPermitResidenceCredentialsIssuerCredentialsService.GetLastEidDataCredentialIssuerUrl("ndlseven");
@@ -65,13 +68,13 @@ namespace CountyPermitResidenceCredentialsIssuer.Pages
                 // get the last one
                 var offerUrl = await _CountyPermitResidenceCredentialsIssuerCredentialsService.GetLastEidDataCredentialIssuerUrl();
 
-                EidDataMessage = "Add your E-ID data credentials to your wallet";
+                CountyResidenceDataMessage = "Add your County Residence data credentials to your wallet";
                 CredentialOfferUrl = offerUrl;
-                HasEidData = true;
+                HasCountyResidenceData = true;
             }
             else
             {
-                EidDataMessage = "You have no valid E-ID data";
+                CountyResidenceDataMessage = "You have no valid County Residence data";
             }
         }
     }

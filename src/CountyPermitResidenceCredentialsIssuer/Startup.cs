@@ -34,7 +34,7 @@ namespace CountyPermitResidenceCredentialsIssuer
             services.AddScoped<MattrCredentialsService>();
             services.AddScoped<CountyPermitResidenceCredentialsIssuerCredentialsService>();
 
-            services.AddDbContext<EidDataMattrContext>(options =>
+            services.AddDbContext<CountyResidenceDataMattrContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CountyPermitResidenceCredentialsIssuer.Data
 {
-    public class EidDataCredentials
+    public class CountyResidenceDataCredentials
     {
         [Key]
         public int Id { get; set; }

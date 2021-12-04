@@ -44,7 +44,7 @@ namespace CountyPermitResidenceCredentialsIssuer
             return callback;
         }
 
-        private async Task<EidDataCredentials> CreateMattrDidAndCredentialIssuer()
+        private async Task<CountyResidenceDataCredentials> CreateMattrDidAndCredentialIssuer()
         {
             HttpClient client = _clientFactory.CreateClient();
             var accessToken = await _mattrTokenApiService.GetApiToken(client, "mattrAccessToken");
@@ -55,7 +55,7 @@ namespace CountyPermitResidenceCredentialsIssuer
             var did = await CreateMattrDid(client);
             var oidcIssuer = await CreateMattrCredentialIssuer(client, did);
 
-            return new EidDataCredentials
+            return new CountyResidenceDataCredentials
             {
                 Name = "not_named",
                 Did = JsonConvert.SerializeObject(did),
@@ -88,10 +88,11 @@ namespace CountyPermitResidenceCredentialsIssuer
                     new ClaimMappings{ JsonLdTerm="family_name", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/family_name"},
                     new ClaimMappings{ JsonLdTerm="given_name", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/given_name"},
                     new ClaimMappings{ JsonLdTerm="date_of_birth", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/date_of_birth"},
-                    new ClaimMappings{ JsonLdTerm="birth_place", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/birth_place"},
-                    new ClaimMappings{ JsonLdTerm="height", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/height"},
-                    new ClaimMappings{ JsonLdTerm="nationality", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/nationality"},
-                    new ClaimMappings{ JsonLdTerm="gender", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/gender"}
+                    new ClaimMappings{ JsonLdTerm="address_country", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/address_country"},
+                    new ClaimMappings{ JsonLdTerm="address_locality", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/address_locality"},
+                    new ClaimMappings{ JsonLdTerm="address_region", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/address_region"},
+                    new ClaimMappings{ JsonLdTerm="street_address", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/street_address"},
+                    new ClaimMappings{ JsonLdTerm="postal_code", OidcClaim=$"https://{_mattrConfiguration.TenantSubdomain}/postal_code"}
                 },
                 FederatedProvider = new FederatedProvider
                 {

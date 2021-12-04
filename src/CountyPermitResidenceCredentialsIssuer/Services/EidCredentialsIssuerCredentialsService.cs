@@ -11,10 +11,10 @@ namespace CountyPermitResidenceCredentialsIssuer
 {
     public class CountyPermitResidenceCredentialsIssuerCredentialsService
     {
-        private readonly EidDataMattrContext _eidDataMattrContext;
+        private readonly CountyResidenceDataMattrContext _eidDataMattrContext;
         private readonly MattrConfiguration _mattrConfiguration;
 
-        public CountyPermitResidenceCredentialsIssuerCredentialsService(EidDataMattrContext eidDataMattrContext,
+        public CountyPermitResidenceCredentialsIssuerCredentialsService(CountyResidenceDataMattrContext eidDataMattrContext,
             IOptions<MattrConfiguration> mattrConfiguration)
         {
             _eidDataMattrContext = eidDataMattrContext;
@@ -69,7 +69,7 @@ namespace CountyPermitResidenceCredentialsIssuer
             return string.Empty;
         }
 
-        public async Task CreateEidData(EidDataCredentials eidDataCredentials)
+        public async Task CreateEidData(CountyResidenceDataCredentials eidDataCredentials)
         {
             _eidDataMattrContext.EidDataCredentials.Add(eidDataCredentials);
             await _eidDataMattrContext.SaveChangesAsync();
