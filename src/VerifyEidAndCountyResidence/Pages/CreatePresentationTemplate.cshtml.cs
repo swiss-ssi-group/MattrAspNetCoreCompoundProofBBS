@@ -29,7 +29,9 @@ namespace VerifyEidAndCountyResidence.Pages
                 return Page();
             }
 
-            TemplateId = await _mattrVerifyService.CreatePresentationTemplateId(PresentationTemplate.DidId);
+            TemplateId = await _mattrVerifyService.CreatePresentationTemplateId(
+                PresentationTemplate.DidEid, PresentationTemplate.DidCountyResidence);
+
             CreatingPresentationTemplate = false;
             return Page();
         }
@@ -38,6 +40,10 @@ namespace VerifyEidAndCountyResidence.Pages
     public class PresentationTemplate
     {
         [Required]
-        public string DidId { get; set; }
+        public string DidEid { get; set; }
+
+        [Required]
+        public string DidCountyResidence { get; set; }
+        
     }
 }

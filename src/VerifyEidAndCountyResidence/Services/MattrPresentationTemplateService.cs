@@ -29,10 +29,10 @@ namespace VerifyEidAndCountyResidence
             _mattrConfiguration = mattrConfiguration.Value;
         }
 
-        public async Task<string> CreatePresentationTemplateId(string didId)
+        public async Task<string> CreatePresentationTemplateId(string didId, string didCountyResidence)
         {
             // create a new one
-            var v1PresentationTemplateResponse = await CreateMattrPresentationTemplate(didId);
+            var v1PresentationTemplateResponse = await CreateMattrPresentationTemplate(didId, didCountyResidence);
 
             // save to db
             var drivingLicensePresentationTemplate = new EidCountyResidenceDataPresentationTemplate
@@ -46,7 +46,7 @@ namespace VerifyEidAndCountyResidence
             return v1PresentationTemplateResponse.Id;
         }
 
-        private async Task<V1_PresentationTemplateResponse> CreateMattrPresentationTemplate(string didId)
+        private async Task<V1_PresentationTemplateResponse> CreateMattrPresentationTemplate(string didId, string didCountyResidence)
         {
             HttpClient client = _clientFactory.CreateClient();
             var accessToken = await _mattrTokenApiService.GetApiToken(client, "mattrAccessToken");
@@ -55,12 +55,12 @@ namespace VerifyEidAndCountyResidence
                 new AuthenticationHeaderValue("Bearer", accessToken);
             client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
 
-            var v1PresentationTemplateResponse = await CreateMattrPresentationTemplate(client, didId);
+            var v1PresentationTemplateResponse = await CreateMattrPresentationTemplate(client, didId, didCountyResidence);
             return v1PresentationTemplateResponse;
         }
 
         private async Task<V1_PresentationTemplateResponse> CreateMattrPresentationTemplate(
-            HttpClient client, string didId)
+            HttpClient client, string didEid, string didCountyResidence)
         {
             // create presentation, post to presentations templates api
             // https://learn.mattr.global/tutorials/verify/presentation-request-template
@@ -87,7 +87,12 @@ namespace VerifyEidAndCountyResidence
                         new TrustedIssuer
                         {
                             Required = true,
-                            Issuer = didId // DID use to create the oidc
+                            Issuer = didEid // DID use to create the oidc
+                        },
+                        new TrustedIssuer
+                        {
+                            Required = true,
+                            Issuer = didCountyResidence // DID use to create the oidc
                         }
                     },
                     Frame = new Frame

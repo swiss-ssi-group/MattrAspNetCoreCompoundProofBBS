@@ -7,10 +7,17 @@
             <form method="post">
                 <div>
                     <div class="form-group">
-                        <label class="control-label">DID ID</label>
-                        <input asp-for="PresentationTemplate.DidId" class="form-control" />
-                        <span asp-validation-for="PresentationTemplate.DidId" class="text-danger"></span>
+                        <label class="control-label">DID E-ID</label>
+                        <input asp-for="PresentationTemplate.DidEid" class="form-control" />
+                        <span asp-validation-for="PresentationTemplate.DidEid" class="text-danger"></span>
                     </div>
+
+                    <div class="form-group">
+                        <label class="control-label">DID County Residence</label>
+                        <input asp-for="PresentationTemplate.DidCountyResidence" class="form-control" />
+                        <span asp-validation-for="PresentationTemplate.DidCountyResidence" class="text-danger"></span>
+                    </div>
+
                     <div class="form-group">
                         @if (Model.CreatingPresentationTemplate)
                         {
