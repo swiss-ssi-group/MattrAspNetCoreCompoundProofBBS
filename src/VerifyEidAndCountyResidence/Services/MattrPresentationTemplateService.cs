@@ -88,12 +88,12 @@ namespace VerifyEidAndCountyResidence
                         new TrustedIssuer
                         {
                             Required = true,
-                            Issuer = didEid // DID use to create the oidc
+                            Issuer = didEid // DID used to create the oidc
                         },
                         new TrustedIssuer
                         {
                             Required = true,
-                            Issuer = didCountyResidence // DID use to create the oidc
+                            Issuer = didCountyResidence // DID used to create the oidc
                         }
                     },
                     Frame = new Frame
