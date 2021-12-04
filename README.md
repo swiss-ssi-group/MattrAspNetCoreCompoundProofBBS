@@ -183,6 +183,8 @@ https://www.lfph.io/wp-content/uploads/2021/02/Verifiable-Credentials-Flavors-Ex
 
 https://anonyome.com/2020/06/decentralized-identity-key-concepts-explained/
 
+https://techcommunity.microsoft.com/t5/identity-standards-blog/advancing-privacy-with-zero-knowledge-proof-credentials/ba-p/1441554
+
 # Mattr.Global instructions 
 
 In order to obtain a Credential on the mobile wallet you will need to use the OIDC Bridge, so try following this tutorial.
