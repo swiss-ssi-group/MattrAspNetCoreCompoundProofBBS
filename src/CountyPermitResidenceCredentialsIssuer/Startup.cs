@@ -5,16 +5,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using CountyPermitResidenceCredentialsIssuer.Services;
+using CountyResidenceCredentialsIssuer.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using System.Threading.Tasks;
-using CountyPermitResidenceCredentialsIssuer.Data;
+using CountyResidenceCredentialsIssuer.Data;
 using Microsoft.EntityFrameworkCore;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace CountyPermitResidenceCredentialsIssuer
+namespace CountyResidenceCredentialsIssuer
 {
     public class Startup
     {

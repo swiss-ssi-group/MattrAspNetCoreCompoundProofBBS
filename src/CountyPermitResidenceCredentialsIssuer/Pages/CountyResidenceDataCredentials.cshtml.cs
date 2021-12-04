@@ -2,10 +2,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 using System.Linq;
 using System.Threading.Tasks;
-using CountyPermitResidenceCredentialsIssuer.Data;
-using CountyPermitResidenceCredentialsIssuer.Services;
+using CountyResidenceCredentialsIssuer.Data;
+using CountyResidenceCredentialsIssuer.Services;
 
-namespace CountyPermitResidenceCredentialsIssuer.Pages
+namespace CountyResidenceCredentialsIssuer.Pages
 {
     public class EidDataCredentialsModel : PageModel
     {
@@ -66,7 +66,7 @@ namespace CountyPermitResidenceCredentialsIssuer.Pages
                 //var offerUrl = await _CountyPermitResidenceCredentialsIssuerCredentialsService.GetLastEidDataCredentialIssuerUrl("ndlseven");
 
                 // get the last one
-                var offerUrl = await _CountyPermitResidenceCredentialsIssuerCredentialsService.GetLastEidDataCredentialIssuerUrl();
+                var offerUrl = await _CountyPermitResidenceCredentialsIssuerCredentialsService.GetLastCountyResidenceDataCredentialIssuerUrl();
 
                 CountyResidenceDataMessage = "Add your County Residence data credentials to your wallet";
                 CredentialOfferUrl = offerUrl;

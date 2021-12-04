@@ -1,6 +1,6 @@
-# Verifiable credentials ZKP E-ID  Compound proofs with BBS+
+# Verifiable credentials ZKP County Residence Compound proofs with BBS+
 
-creates E-ID credentials
+creates County Residence credentials
 
 ## Database migrations create
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace CountyPermitResidenceCredentialsIssuer.Data
+namespace CountyResidenceCredentialsIssuer.Data
 {
     public class CountyResidenceDataMattrContext : DbContext
     {

@@ -1,4 +1,4 @@
-﻿namespace CountyPermitResidenceCredentialsIssuer.Services
+﻿namespace CountyResidenceCredentialsIssuer.Services
 {
     public class MattrConfiguration
     {

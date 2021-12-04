@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace CountyPermitResidenceCredentialsIssuer.Pages
+namespace CountyResidenceCredentialsIssuer.Pages
 {
     [Authorize]
     public class IndexModel : PageModel

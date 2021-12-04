@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace CountyPermitResidenceCredentialsIssuer.Pages
+namespace CountyResidenceCredentialsIssuer.Pages
 {
     public class ViewLastCredentialsInfoModel : PageModel
     {
@@ -17,7 +17,7 @@ namespace CountyPermitResidenceCredentialsIssuer.Pages
         }
         public async Task OnGetAsync()
         {
-            var credentialIssuer = await _CountyPermitResidenceCredentialsIssuerCredentialsService.GetLastEidCredentialIssuer();
+            var credentialIssuer = await _CountyPermitResidenceCredentialsIssuerCredentialsService.GetLastCountyResidenceCredentialIssuer();
             LatestEidDataCallback = credentialIssuer.Callback;
             LatestEidDid = credentialIssuer.DidId;
         }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace CountyPermitResidenceCredentialsIssuer.Data
+namespace CountyResidenceCredentialsIssuer.Data
 {
     public class CountyResidenceDataCredentials
     {

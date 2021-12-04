@@ -1,4 +1,4 @@
-﻿namespace CountyPermitResidenceCredentialsIssuer.Data
+﻿namespace CountyResidenceCredentialsIssuer.Data
 {
     /// Could follow some definition like this
     /// https://schema.org/PostalAddress

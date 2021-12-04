@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Json;
 
-namespace CountyPermitResidenceCredentialsIssuer.Services
+namespace CountyResidenceCredentialsIssuer.Services
 {
     public class MattrTokenApiService
     {

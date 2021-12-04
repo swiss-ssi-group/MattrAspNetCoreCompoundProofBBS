@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using CountyPermitResidenceCredentialsIssuer.Data;
-using CountyPermitResidenceCredentialsIssuer.MattrOpenApiClient;
-using CountyPermitResidenceCredentialsIssuer.Services;
+using CountyResidenceCredentialsIssuer.Data;
+using CountyResidenceCredentialsIssuer.MattrOpenApiClient;
+using CountyResidenceCredentialsIssuer.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace CountyPermitResidenceCredentialsIssuer
+namespace CountyResidenceCredentialsIssuer
 {
     public class MattrCredentialsService
     {
@@ -38,7 +38,7 @@ namespace CountyPermitResidenceCredentialsIssuer
             // create a new one
             var eidDataCredentials = await CreateMattrDidAndCredentialIssuer();
             eidDataCredentials.Name = name;
-            await _CountyPermitResidenceCredentialsIssuerCredentialsService.CreateEidData(eidDataCredentials);
+            await _CountyPermitResidenceCredentialsIssuerCredentialsService.CreateCountyResidenceData(eidDataCredentials);
 
             var callback = $"https://{_mattrConfiguration.TenantSubdomain}/ext/oidc/v1/issuers/{eidDataCredentials.OidcIssuerId}/federated/callback";
             return callback;

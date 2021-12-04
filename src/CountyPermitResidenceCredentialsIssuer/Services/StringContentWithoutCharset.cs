@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Text;
 
-namespace CountyPermitResidenceCredentialsIssuer.Services
+namespace CountyResidenceCredentialsIssuer.Services
 {
     public class StringContentWithoutCharset : StringContent
     {
