@@ -36,11 +36,11 @@ namespace EidCredentialsIssuer
         public async Task<string> CreateCredentialsAndCallback(string name)
         {
             // create a new one
-            var vaccinationDataCredentials = await CreateMattrDidAndCredentialIssuer();
-            vaccinationDataCredentials.Name = name;
-            await _EidCredentialsIssuerCredentialsService.CreateEidData(vaccinationDataCredentials);
+            var eidDataCredentials = await CreateMattrDidAndCredentialIssuer();
+            eidDataCredentials.Name = name;
+            await _EidCredentialsIssuerCredentialsService.CreateEidData(eidDataCredentials);
 
-            var callback = $"https://{_mattrConfiguration.TenantSubdomain}/ext/oidc/v1/issuers/{vaccinationDataCredentials.OidcIssuerId}/federated/callback";
+            var callback = $"https://{_mattrConfiguration.TenantSubdomain}/ext/oidc/v1/issuers/{eidDataCredentials.OidcIssuerId}/federated/callback";
             return callback;
         }
 
@@ -76,7 +76,7 @@ namespace EidCredentialsIssuer
                 Credential = new Credential
                 {
                     IssuerDid = did.Did,
-                    Name = "VaccinationCertificate7",
+                    Name = "EID",
                     Context = new List<Uri> {
                         new Uri( "https://schema.org"),
                         new Uri( "https://www.w3.org/2018/credentials/v1")

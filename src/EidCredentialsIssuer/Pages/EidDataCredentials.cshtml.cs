@@ -60,7 +60,7 @@ namespace EidCredentialsIssuer.Pages
                     Gender = genderClaim.Value
                 };
                 // get per name
-                //var offerUrl = await _eidCredentialsIssuerCredentialsService.GetLastVaccinationDataCredentialIssuerUrl("ndlseven");
+                //var offerUrl = await _eidCredentialsIssuerCredentialsService.GetLastEidDataCredentialIssuerUrl("ndlseven");
 
                 // get the last one
                 var offerUrl = await _eidCredentialsIssuerCredentialsService.GetLastEidDataCredentialIssuerUrl();
@@ -71,7 +71,7 @@ namespace EidCredentialsIssuer.Pages
             }
             else
             {
-                EidDataMessage = "You have no valid vaccination data";
+                EidDataMessage = "You have no valid E-ID data";
             }
         }
     }

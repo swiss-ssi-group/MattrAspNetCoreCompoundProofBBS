@@ -1,4 +1,4 @@
-# Verifiable credentials ZKP Vaccination Data
+# Verifiable credentials ZKP E-ID  Compound proofs with BBS+
 
 creates E-ID credentials
 

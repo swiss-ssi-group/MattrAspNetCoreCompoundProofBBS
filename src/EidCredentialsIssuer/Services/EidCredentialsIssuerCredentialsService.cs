@@ -40,14 +40,14 @@ namespace EidCredentialsIssuer
 
         public async Task<string> GetLastEidDataCredentialIssuerUrl()
         {
-            var vaccinationData = await _eidDataMattrContext
+            var eidData = await _eidDataMattrContext
                 .EidDataCredentials
                 .OrderBy(u => u.Id)
                 .LastOrDefaultAsync();
 
-            if (vaccinationData != null)
+            if (eidData != null)
             {
-                var url = $"openid://discovery?issuer=https://{_mattrConfiguration.TenantSubdomain}/ext/oidc/v1/issuers/{vaccinationData.OidcIssuerId}";
+                var url = $"openid://discovery?issuer=https://{_mattrConfiguration.TenantSubdomain}/ext/oidc/v1/issuers/{eidData.OidcIssuerId}";
                 return url;
             }
 
@@ -56,13 +56,13 @@ namespace EidCredentialsIssuer
 
         public async Task<string> GetEidDataCredentialIssuerUrl(string name)
         {
-            var vaccinationData = await _eidDataMattrContext
+            var eidData = await _eidDataMattrContext
                 .EidDataCredentials
                 .FirstOrDefaultAsync(dl => dl.Name == name);
 
-            if (vaccinationData != null)
+            if (eidData != null)
             {
-                var url = $"openid://discovery?issuer=https://{_mattrConfiguration.TenantSubdomain}/ext/oidc/v1/issuers/{vaccinationData.OidcIssuerId}";
+                var url = $"openid://discovery?issuer=https://{_mattrConfiguration.TenantSubdomain}/ext/oidc/v1/issuers/{eidData.OidcIssuerId}";
                 return url;
             }
 
