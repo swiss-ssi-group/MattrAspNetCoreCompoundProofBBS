@@ -5,9 +5,9 @@ namespace VerifyEidAndCountyResidence.Pages
 {
     public class VerifiedUserModel : PageModel
     {
-        private readonly VerifyEidAndCountyResidenceDbService _VerifyEidAndCountyResidenceDbService;
+        private readonly VerifyEidCountyResidenceDbService _VerifyEidAndCountyResidenceDbService;
 
-        public VerifiedUserModel(VerifyEidAndCountyResidenceDbService VerifyEidAndCountyResidenceDbService)
+        public VerifiedUserModel(VerifyEidCountyResidenceDbService VerifyEidAndCountyResidenceDbService)
         {
             _VerifyEidAndCountyResidenceDbService = VerifyEidAndCountyResidenceDbService;
         }

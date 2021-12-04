@@ -2,7 +2,7 @@
 
 namespace VerifyEidAndCountyResidence.Data
 {
-    public class EidAndCountyResidenceDataPresentationTemplate
+    public class EidCountyResidenceDataPresentationTemplate
     {
         [Key]
         public int Id { get; set; }

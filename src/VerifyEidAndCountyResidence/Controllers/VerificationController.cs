@@ -1,7 +1,7 @@
-﻿using VerifyEidAndCountyResidence.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
+using VerifyEidAndCountyResidence.Services;
 
 namespace VerifyEidAndCountyResidence.Controllers
 {
@@ -9,15 +9,15 @@ namespace VerifyEidAndCountyResidence.Controllers
     [Route("api/[controller]")]
     public class VerificationController : Controller
     {
-        private readonly VerifyEidAndCountyResidenceDbService _VerifyEidAndCountyResidenceDbService;
+        private readonly VerifyEidCountyResidenceDbService _verifyEidAndCountyResidenceDbService;
 
         private readonly IHubContext<MattrVerifiedSuccessHub> _hubContext;
 
-        public VerificationController(VerifyEidAndCountyResidenceDbService VerifyEidAndCountyResidenceDbService,
+        public VerificationController(VerifyEidCountyResidenceDbService verifyEidAndCountyResidenceDbService,
             IHubContext<MattrVerifiedSuccessHub> hubContext)
         {
             _hubContext = hubContext;
-            _VerifyEidAndCountyResidenceDbService = VerifyEidAndCountyResidenceDbService;
+            _verifyEidAndCountyResidenceDbService = verifyEidAndCountyResidenceDbService;
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace VerifyEidAndCountyResidence.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> VerificationDataCallback([FromBody] VerifiedVaccinationData body)
+        public async Task<IActionResult> VerificationDataCallback([FromBody] VerifiedEidCountyResidenceData body)
         {
             string connectionId;
             var found = MattrVerifiedSuccessHub.Challenges
@@ -53,11 +53,11 @@ namespace VerifyEidAndCountyResidence.Controllers
             //await _hubContext.Clients.Client(connectionId).SendAsync("MattrCallbackSuccess", $"{body.ChallengeId}");
             //return Ok();
 
-            var exists = await _VerifyEidAndCountyResidenceDbService.ChallengeExists(body.ChallengeId);
+            var exists = await _verifyEidAndCountyResidenceDbService.ChallengeExists(body.ChallengeId);
 
             if (exists)
             {
-                await _VerifyEidAndCountyResidenceDbService.PersistVerification(body);
+                await _verifyEidAndCountyResidenceDbService.PersistVerification(body);
 
                 if (found)
                 {

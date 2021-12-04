@@ -16,7 +16,7 @@ namespace VerifyEidAndCountyResidence.Controllers
     ///        "http://schema.org/vaccination_date": "2021-05-12"
     ///    },
     /// </summary>
-    public class VerifiedVaccinationDataClaims
+    public class VerifiedEidCountyResidenceDataClaims
     {
         public string Id { get; set; }
 

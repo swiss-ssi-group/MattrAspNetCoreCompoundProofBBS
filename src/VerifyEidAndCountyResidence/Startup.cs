@@ -27,10 +27,10 @@ namespace VerifyEidAndCountyResidence
             services.AddScoped<MattrTokenApiService>();
             services.AddScoped<MattrPresentationTemplateService>();
             services.AddScoped<MattrCredentialVerifyCallbackService>();
-            services.AddScoped<VerifyEidAndCountyResidenceDbService>();
+            services.AddScoped<VerifyEidCountyResidenceDbService>();
             services.AddScoped<MattrCreateDidService>();
 
-            services.AddDbContext<VerifyEidAndCountyResidenceMattrContext>(options =>
+            services.AddDbContext<VerifyEidCountyResidenceMattrContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 

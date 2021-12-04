@@ -26,14 +26,14 @@ namespace VerifyEidAndCountyResidence
 
         private readonly IHttpClientFactory _clientFactory;
         private readonly MattrTokenApiService _mattrTokenApiService;
-        private readonly VerifyEidAndCountyResidenceDbService _VerifyEidAndCountyResidenceDbService;
+        private readonly VerifyEidCountyResidenceDbService _VerifyEidAndCountyResidenceDbService;
         private readonly MattrConfiguration _mattrConfiguration;
         private readonly MattrCreateDidService _mattrCreateDidService;
 
         public MattrCredentialVerifyCallbackService(IHttpClientFactory clientFactory,
             IOptions<MattrConfiguration> mattrConfiguration,
             MattrTokenApiService mattrTokenApiService,
-            VerifyEidAndCountyResidenceDbService VerifyEidAndCountyResidenceDbService,
+            VerifyEidCountyResidenceDbService VerifyEidAndCountyResidenceDbService,
             MattrCreateDidService mattrCreateDidService)
         {
             _clientFactory = clientFactory;
@@ -89,7 +89,7 @@ namespace VerifyEidAndCountyResidence
             var jws = signAndEncodePresentationRequestBodyResponse.Replace("\"", "");
 
             // save to db // TODO add this back once working
-            var vaccinationDataPresentationVerify = new EidAndCountyResidenceDataPresentationVerify
+            var vaccinationDataPresentationVerify = new EidCountyResidenceDataPresentationVerify
             {
                 DidId = template.DidId,
                 TemplateId = template.TemplateId,

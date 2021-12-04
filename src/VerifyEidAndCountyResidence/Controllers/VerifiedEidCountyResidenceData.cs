@@ -20,7 +20,7 @@ namespace VerifyEidAndCountyResidence.Controllers
     ///    "verified": true,
     ///    "holder": "did:key:z6MkmGHPWdKjLqiTydLHvRRdHPNDdUDKDudjiF87RNFjM2fb"
     ///}
-    public class VerifiedVaccinationData
+    public class VerifiedEidCountyResidenceData
     {
         [JsonPropertyName("presentationType")]
         public string PresentationType { get; set; }
@@ -29,7 +29,7 @@ namespace VerifyEidAndCountyResidence.Controllers
         public string ChallengeId { get; set; }
 
         [JsonPropertyName("claims")]
-        public VerifiedVaccinationDataClaims Claims { get; set; } = new VerifiedVaccinationDataClaims();
+        public VerifiedEidCountyResidenceDataClaims Claims { get; set; } = new VerifiedEidCountyResidenceDataClaims();
 
         [JsonPropertyName("verified")]
         public bool Verified { get; set; }

@@ -15,13 +15,13 @@ namespace VerifyEidAndCountyResidence
     {
         private readonly IHttpClientFactory _clientFactory;
         private readonly MattrTokenApiService _mattrTokenApiService;
-        private readonly VerifyEidAndCountyResidenceDbService _VerifyEidAndCountyResidenceDbService;
+        private readonly VerifyEidCountyResidenceDbService _VerifyEidAndCountyResidenceDbService;
         private readonly MattrConfiguration _mattrConfiguration;
 
         public MattrPresentationTemplateService(IHttpClientFactory clientFactory,
             IOptions<MattrConfiguration> mattrConfiguration,
             MattrTokenApiService mattrTokenApiService,
-            VerifyEidAndCountyResidenceDbService VerifyEidAndCountyResidenceDbService)
+            VerifyEidCountyResidenceDbService VerifyEidAndCountyResidenceDbService)
         {
             _clientFactory = clientFactory;
             _mattrTokenApiService = mattrTokenApiService;
@@ -35,7 +35,7 @@ namespace VerifyEidAndCountyResidence
             var v1PresentationTemplateResponse = await CreateMattrPresentationTemplate(didId);
 
             // save to db
-            var drivingLicensePresentationTemplate = new EidAndCountyResidenceDataPresentationTemplate
+            var drivingLicensePresentationTemplate = new EidCountyResidenceDataPresentationTemplate
             {
                 DidId = didId,
                 TemplateId = v1PresentationTemplateResponse.Id,

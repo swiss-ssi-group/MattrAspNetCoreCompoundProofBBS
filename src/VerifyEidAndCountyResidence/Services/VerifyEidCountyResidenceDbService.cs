@@ -6,53 +6,53 @@ using VerifyEidAndCountyResidence.Controllers;
 
 namespace VerifyEidAndCountyResidence
 {
-    public class VerifyEidAndCountyResidenceDbService
+    public class VerifyEidCountyResidenceDbService
     {
-        private readonly VerifyEidAndCountyResidenceMattrContext _verifyEidAndCountyResidenceMattrContext;
+        private readonly VerifyEidCountyResidenceMattrContext _verifyEidCountyResidenceMattrContext;
 
-        public VerifyEidAndCountyResidenceDbService(VerifyEidAndCountyResidenceMattrContext verifyEidAndCountyResidenceMattrContext)
+        public VerifyEidCountyResidenceDbService(VerifyEidCountyResidenceMattrContext verifyEidAndCountyResidenceMattrContext)
         {
-            _verifyEidAndCountyResidenceMattrContext = verifyEidAndCountyResidenceMattrContext;
+            _verifyEidCountyResidenceMattrContext = verifyEidAndCountyResidenceMattrContext;
         }
 
         public async Task<(string DidId, string TemplateId)> GetLastVaccinationDataPresentationTemplate()
         {
-            var vaccineTemplate = await _verifyEidAndCountyResidenceMattrContext
+            var eidCountyResidenceTemplate = await _verifyEidCountyResidenceMattrContext
                 .EidAndCountyResidenceDataPresentationTemplates
                 .OrderBy(u => u.Id)
                 .LastOrDefaultAsync();
 
-            if (vaccineTemplate != null)
+            if (eidCountyResidenceTemplate != null)
             {
-                var templateId = vaccineTemplate.TemplateId;
-                return (vaccineTemplate.DidId, vaccineTemplate.TemplateId);
+                var templateId = eidCountyResidenceTemplate.TemplateId;
+                return (eidCountyResidenceTemplate.DidId, eidCountyResidenceTemplate.TemplateId);
             }
 
             return (string.Empty, string.Empty);
         }
 
-        public async Task CreateEidAndCountyResidenceDataTemplate(EidAndCountyResidenceDataPresentationTemplate template)
+        public async Task CreateEidAndCountyResidenceDataTemplate(EidCountyResidenceDataPresentationTemplate template)
         {
-            _verifyEidAndCountyResidenceMattrContext
+            _verifyEidCountyResidenceMattrContext
                 .EidAndCountyResidenceDataPresentationTemplates.Add(template);
 
-            await _verifyEidAndCountyResidenceMattrContext.SaveChangesAsync();
+            await _verifyEidCountyResidenceMattrContext.SaveChangesAsync();
         }
 
         public async Task<bool> ChallengeExists(string challengeId)
         {
-            return await _verifyEidAndCountyResidenceMattrContext
+            return await _verifyEidCountyResidenceMattrContext
                 .EidAndCountyResidenceDataPresentationVerifications
                 .AnyAsync(d => d.Challenge == challengeId);
         }
 
-        public async Task CreateEidAndCountyResidenceDataPresentationVerify(EidAndCountyResidenceDataPresentationVerify verify)
+        public async Task CreateEidAndCountyResidenceDataPresentationVerify(EidCountyResidenceDataPresentationVerify verify)
         {
-            _verifyEidAndCountyResidenceMattrContext.EidAndCountyResidenceDataPresentationVerifications.Add(verify);
-            await _verifyEidAndCountyResidenceMattrContext.SaveChangesAsync();
+            _verifyEidCountyResidenceMattrContext.EidAndCountyResidenceDataPresentationVerifications.Add(verify);
+            await _verifyEidCountyResidenceMattrContext.SaveChangesAsync();
         }
 
-        public async Task PersistVerification(VerifiedVaccinationData item)
+        public async Task PersistVerification(VerifiedEidCountyResidenceData item)
         {
             var data = new VerifiedEidAndCountyResidenceData
             {
@@ -72,28 +72,28 @@ namespace VerifyEidAndCountyResidence
                 Verified = item.Verified
             };
 
-            _verifyEidAndCountyResidenceMattrContext.VerifiedEidAndCountyResidenceData.Add(data);
-            await _verifyEidAndCountyResidenceMattrContext.SaveChangesAsync();
+            _verifyEidCountyResidenceMattrContext.VerifiedEidAndCountyResidenceData.Add(data);
+            await _verifyEidCountyResidenceMattrContext.SaveChangesAsync();
         }
 
         public async Task<VerifiedEidAndCountyResidenceData> GetVerifiedUser(string challengeId)
         {
-            return await _verifyEidAndCountyResidenceMattrContext
+            return await _verifyEidCountyResidenceMattrContext
                 .VerifiedEidAndCountyResidenceData
                 .FirstOrDefaultAsync(v => v.ChallengeId == challengeId);
         }
 
         public async Task<Did> GetDid(string name)
         {
-            return await _verifyEidAndCountyResidenceMattrContext
+            return await _verifyEidCountyResidenceMattrContext
                 .Dids
                 .FirstOrDefaultAsync(v => v.Name == name);
         }
 
         public async Task<Did> CreateDid(Did did)
         {
-            _verifyEidAndCountyResidenceMattrContext.Dids.Add(did);
-            await _verifyEidAndCountyResidenceMattrContext.SaveChangesAsync();
+            _verifyEidCountyResidenceMattrContext.Dids.Add(did);
+            await _verifyEidCountyResidenceMattrContext.SaveChangesAsync();
             return did;
         }
     }

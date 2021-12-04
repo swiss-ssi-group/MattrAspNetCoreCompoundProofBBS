@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace VerifyEidAndCountyResidence.Data
 {
-    public class EidAndCountyResidenceDataPresentationVerify
+    public class EidCountyResidenceDataPresentationVerify
     {
         [Key]
         public int Id { get; set; }

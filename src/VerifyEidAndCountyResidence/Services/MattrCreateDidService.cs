@@ -16,14 +16,14 @@ namespace VerifyEidAndCountyResidence.Services
         private readonly IHttpClientFactory _clientFactory;
         private readonly MattrTokenApiService _mattrTokenApiService;
         private readonly MattrConfiguration _mattrConfiguration;
-        private readonly VerifyEidAndCountyResidenceDbService _VerifyEidAndCountyResidenceDbService;
+        private readonly VerifyEidCountyResidenceDbService _VerifyEidAndCountyResidenceDbService;
 
 
         public MattrCreateDidService(IConfiguration configuration,
             IHttpClientFactory clientFactory,
             IOptions<MattrConfiguration> mattrConfiguration,
             MattrTokenApiService mattrTokenApiService,
-            VerifyEidAndCountyResidenceDbService VerifyEidAndCountyResidenceDbService)
+            VerifyEidCountyResidenceDbService VerifyEidAndCountyResidenceDbService)
         {
             _configuration = configuration;
             _clientFactory = clientFactory;
