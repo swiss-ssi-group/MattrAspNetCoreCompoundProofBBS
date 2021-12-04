@@ -8,7 +8,7 @@ namespace EidCredentialsIssuer.Pages
     public class AdminModel : PageModel
     {
         private readonly MattrCredentialsService _mattrCredentialsService;
-        public bool CreatingVaccinationData { get; set; } = true;
+        public bool CreatingEidData { get; set; } = true;
         public string Callback { get; set; }
 
         [BindProperty]
@@ -30,7 +30,7 @@ namespace EidCredentialsIssuer.Pages
             }
 
             Callback = await _mattrCredentialsService.CreateCredentialsAndCallback(IssuerCredential.CredentialName);
-            CreatingVaccinationData = false;
+            CreatingEidData = false;
             return Page();
         }
     }

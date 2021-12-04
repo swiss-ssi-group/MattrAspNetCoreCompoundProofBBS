@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Vaccination Data Issuer</title>
+    <title>@ViewData["Title"] - E-ID Data Issuer</title>
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/vendor.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/fontawesome-free-5.15.2-web/css/all.min.css" asp-append-version="true" />
@@ -18,7 +18,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Vaccination Data Issuer</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">E-ID Data Issuer</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -45,13 +45,13 @@
 
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/VaccinationDataCredentials"
+                            <a class="nav-link text-dark" asp-area="" asp-page="/EidDataCredentials"
                                id="tooltip-car"
                                data-toggle="tooltip"
                                data-placement="bottom"
-                               title="View you actual vaccination data and view, get credentials">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                Add Vaccination Data to Wallet
+                               title="View you actual E-ID data and view, get credentials">
+                                <i class="fa fa-passport" aria-hidden="true"></i>
+                                Add E-ID vc to Wallet
                             </a>
                         </li>
 
@@ -61,7 +61,7 @@
                                data-toggle="tooltip"
                                data-placement="bottom"
                                title="Create OIDC Credential Issuer">
-                                <i class="fa fa-hospital" aria-hidden="true"></i>
+                                <i class="fa fa-passport" aria-hidden="true"></i>
                                 View last Credentials Issuer
                             </a>
                         </li>
@@ -72,7 +72,7 @@
                                data-toggle="tooltip"
                                data-placement="bottom"
                                title="Create OIDC Credential Issuer">
-                                <i class="fa fa-hospital" aria-hidden="true"></i>
+                                <i class="fa fa-key" aria-hidden="true"></i>
                                 Create OIDC Credential Issuer
                             </a>
                         </li>
@@ -90,7 +90,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - Vaccination Data - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2021 - E-ID Data - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 
