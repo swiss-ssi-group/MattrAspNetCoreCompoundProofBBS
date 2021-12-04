@@ -88,10 +88,11 @@ namespace VerifyEidAndCountyResidence
             // fix strange DTO
             var jws = signAndEncodePresentationRequestBodyResponse.Replace("\"", "");
 
-            // save to db // TODO add this back once working
+            // save to db 
             var vaccinationDataPresentationVerify = new EidCountyResidenceDataPresentationVerify
             {
-                DidId = template.DidId,
+                DidEid = template.DidEid,
+                DidCountyResidence = template.DidCountyResidence,
                 TemplateId = template.TemplateId,
                 CallbackUrl = callbackUrlFull,
                 Challenge = challenge,

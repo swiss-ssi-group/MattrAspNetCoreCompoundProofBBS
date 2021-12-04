@@ -15,7 +15,7 @@ namespace VerifyEidAndCountyResidence
             _verifyEidCountyResidenceMattrContext = verifyEidAndCountyResidenceMattrContext;
         }
 
-        public async Task<(string DidId, string TemplateId)> GetLastVaccinationDataPresentationTemplate()
+        public async Task<(string DidEid, string DidCountyResidence, string TemplateId)> GetLastVaccinationDataPresentationTemplate()
         {
             var eidCountyResidenceTemplate = await _verifyEidCountyResidenceMattrContext
                 .EidAndCountyResidenceDataPresentationTemplates
@@ -25,10 +25,13 @@ namespace VerifyEidAndCountyResidence
             if (eidCountyResidenceTemplate != null)
             {
                 var templateId = eidCountyResidenceTemplate.TemplateId;
-                return (eidCountyResidenceTemplate.DidId, eidCountyResidenceTemplate.TemplateId);
+
+                return (eidCountyResidenceTemplate.DidEid, 
+                    eidCountyResidenceTemplate.DidCountyResidence, 
+                    eidCountyResidenceTemplate.TemplateId);
             }
 
-            return (string.Empty, string.Empty);
+            return (string.Empty, string.Empty, string.Empty);
         }
 
         public async Task CreateEidAndCountyResidenceDataTemplate(EidCountyResidenceDataPresentationTemplate template)

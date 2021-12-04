@@ -16,25 +16,25 @@ namespace VerifyEidAndCountyResidence.Services
         private readonly IHttpClientFactory _clientFactory;
         private readonly MattrTokenApiService _mattrTokenApiService;
         private readonly MattrConfiguration _mattrConfiguration;
-        private readonly VerifyEidCountyResidenceDbService _VerifyEidAndCountyResidenceDbService;
+        private readonly VerifyEidCountyResidenceDbService _verifyEidAndCountyResidenceDbService;
 
 
         public MattrCreateDidService(IConfiguration configuration,
             IHttpClientFactory clientFactory,
             IOptions<MattrConfiguration> mattrConfiguration,
             MattrTokenApiService mattrTokenApiService,
-            VerifyEidCountyResidenceDbService VerifyEidAndCountyResidenceDbService)
+            VerifyEidCountyResidenceDbService verifyEidAndCountyResidenceDbService)
         {
             _configuration = configuration;
             _clientFactory = clientFactory;
             _mattrTokenApiService = mattrTokenApiService;
             _mattrConfiguration = mattrConfiguration.Value;
-            _VerifyEidAndCountyResidenceDbService = VerifyEidAndCountyResidenceDbService;
+            _verifyEidAndCountyResidenceDbService = verifyEidAndCountyResidenceDbService;
         }
 
         public async Task<V1_CreateDidResponse> GetDidOrCreate(string name)
         {
-            var did = await _VerifyEidAndCountyResidenceDbService.GetDid(name);
+            var did = await _verifyEidAndCountyResidenceDbService.GetDid(name);
             if (did != null)
             {
                 var payload = JsonConvert.DeserializeObject<V1_CreateDidResponse>(did.DidData);
@@ -64,7 +64,7 @@ namespace VerifyEidAndCountyResidence.Services
                 DidId = didMattr.Did
             };
 
-            await _VerifyEidAndCountyResidenceDbService.CreateDid(did);
+            await _verifyEidAndCountyResidenceDbService.CreateDid(did);
 
             return didMattr;
         }

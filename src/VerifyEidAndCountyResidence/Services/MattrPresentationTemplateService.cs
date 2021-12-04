@@ -29,15 +29,16 @@ namespace VerifyEidAndCountyResidence
             _mattrConfiguration = mattrConfiguration.Value;
         }
 
-        public async Task<string> CreatePresentationTemplateId(string didId, string didCountyResidence)
+        public async Task<string> CreatePresentationTemplateId(string didEid, string didCountyResidence)
         {
             // create a new one
-            var v1PresentationTemplateResponse = await CreateMattrPresentationTemplate(didId, didCountyResidence);
+            var v1PresentationTemplateResponse = await CreateMattrPresentationTemplate(didEid, didCountyResidence);
 
             // save to db
             var drivingLicensePresentationTemplate = new EidCountyResidenceDataPresentationTemplate
             {
-                DidId = didId,
+                DidEid = didEid,
+                DidCountyResidence = didCountyResidence,
                 TemplateId = v1PresentationTemplateResponse.Id,
                 MattrPresentationTemplateReponse = JsonConvert.SerializeObject(v1PresentationTemplateResponse)
             };
