@@ -5,21 +5,21 @@ namespace EidCredentialsIssuer.Pages
 {
     public class ViewLastCredentialsInfoModel : PageModel
     {
-        private readonly EidCredentialsIssuerCredentialsService _EidCredentialsIssuerCredentialsService;
+        private readonly EidCredentialsIssuerCredentialsService _eidCredentialsIssuerCredentialsService;
 
-        public string LatestVaccinationDid { get; set; }
-        public string LatestVaccinationDataCallback { get; set; }
+        public string LatestEidDid { get; set; }
+        public string LatestEidDataCallback { get; set; }
 
         public string CredentialOfferUrl { get; set; }
-        public ViewLastCredentialsInfoModel(EidCredentialsIssuerCredentialsService EidCredentialsIssuerCredentialsService)
+        public ViewLastCredentialsInfoModel(EidCredentialsIssuerCredentialsService eidCredentialsIssuerCredentialsService)
         {
-            _EidCredentialsIssuerCredentialsService = EidCredentialsIssuerCredentialsService;
+            _eidCredentialsIssuerCredentialsService = eidCredentialsIssuerCredentialsService;
         }
         public async Task OnGetAsync()
         {
-            var credentialIssuer = await _EidCredentialsIssuerCredentialsService.GetLastVaccineCredentialIssuer();
-            LatestVaccinationDataCallback = credentialIssuer.Callback;
-            LatestVaccinationDid = credentialIssuer.DidId;
+            var credentialIssuer = await _eidCredentialsIssuerCredentialsService.GetLastEidCredentialIssuer();
+            LatestEidDataCallback = credentialIssuer.Callback;
+            LatestEidDid = credentialIssuer.DidId;
         }
     }
 }

@@ -38,13 +38,13 @@ namespace EidCredentialsIssuer
             // create a new one
             var vaccinationDataCredentials = await CreateMattrDidAndCredentialIssuer();
             vaccinationDataCredentials.Name = name;
-            await _EidCredentialsIssuerCredentialsService.CreateVaccinationData(vaccinationDataCredentials);
+            await _EidCredentialsIssuerCredentialsService.CreateEidData(vaccinationDataCredentials);
 
             var callback = $"https://{_mattrConfiguration.TenantSubdomain}/ext/oidc/v1/issuers/{vaccinationDataCredentials.OidcIssuerId}/federated/callback";
             return callback;
         }
 
-        private async Task<VaccinationDataCredentials> CreateMattrDidAndCredentialIssuer()
+        private async Task<EidDataCredentials> CreateMattrDidAndCredentialIssuer()
         {
             HttpClient client = _clientFactory.CreateClient();
             var accessToken = await _mattrTokenApiService.GetApiToken(client, "mattrAccessToken");
@@ -55,7 +55,7 @@ namespace EidCredentialsIssuer
             var did = await CreateMattrDid(client);
             var oidcIssuer = await CreateMattrCredentialIssuer(client, did);
 
-            return new VaccinationDataCredentials
+            return new EidDataCredentials
             {
                 Name = "not_named",
                 Did = JsonConvert.SerializeObject(did),

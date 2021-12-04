@@ -7,26 +7,26 @@ using EidCredentialsIssuer.Services;
 
 namespace EidCredentialsIssuer.Pages
 {
-    public class VaccinationDataCredentialsModel : PageModel
+    public class EidDataCredentialsModel : PageModel
     {
-        private readonly EidCredentialsIssuerCredentialsService _EidCredentialsIssuerCredentialsService;
+        private readonly EidCredentialsIssuerCredentialsService _eidCredentialsIssuerCredentialsService;
         private readonly MattrConfiguration _mattrConfiguration;
 
-        public string VaccinationDataMessage { get; set; } = "Loading credentials";
-        public bool HasVaccinationData { get; set; } = false;
-        public VaccinationData VaccinationData { get; set; }
+        public string EidDataMessage { get; set; } = "Loading credentials";
+        public bool HasEidData { get; set; } = false;
+        public EidData EidData { get; set; }
         public string CredentialOfferUrl { get; set; }
-        public VaccinationDataCredentialsModel(
-            EidCredentialsIssuerCredentialsService EidCredentialsIssuerCredentialsService,
+        public EidDataCredentialsModel(
+            EidCredentialsIssuerCredentialsService eidCredentialsIssuerCredentialsService,
             IOptions<MattrConfiguration> mattrConfiguration)
         {
-            _EidCredentialsIssuerCredentialsService = EidCredentialsIssuerCredentialsService;
+            _eidCredentialsIssuerCredentialsService = eidCredentialsIssuerCredentialsService;
             _mattrConfiguration = mattrConfiguration.Value;
         }
         public async Task OnGetAsync()
         {
 
-            var identityHasVaccinationDataClaims = true;
+            var identityHasEidDataClaims = true;
 
             var familyNameClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/family_name");
             var givenNameClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/given_name");
@@ -46,12 +46,12 @@ namespace EidCredentialsIssuer.Pages
                 || vaccinationDateClaim == null
                 || countryOfVaccinationClaim == null)
             {
-                identityHasVaccinationDataClaims = false;
+                identityHasEidDataClaims = false;
             }
 
-            if (identityHasVaccinationDataClaims)
+            if (identityHasEidDataClaims)
             {
-                VaccinationData = new VaccinationData
+                EidData = new EidData
                 {
                     FamilyName = familyNameClaim.Value,
                     GivenName = givenNameClaim.Value,
@@ -63,18 +63,18 @@ namespace EidCredentialsIssuer.Pages
                     CountryOfVaccination = countryOfVaccinationClaim.Value
                 };
                 // get per name
-                //var offerUrl = await _EidCredentialsIssuerCredentialsService.GetLastVaccinationDataCredentialIssuerUrl("ndlseven");
+                //var offerUrl = await _eidCredentialsIssuerCredentialsService.GetLastVaccinationDataCredentialIssuerUrl("ndlseven");
 
                 // get the last one
-                var offerUrl = await _EidCredentialsIssuerCredentialsService.GetLastVaccinationDataCredentialIssuerUrl();
+                var offerUrl = await _eidCredentialsIssuerCredentialsService.GetLastEidDataCredentialIssuerUrl();
 
-                VaccinationDataMessage = "Add your vaccination data credentials to your wallet";
+                EidDataMessage = "Add your E-ID data credentials to your wallet";
                 CredentialOfferUrl = offerUrl;
-                HasVaccinationData = true;
+                HasEidData = true;
             }
             else
             {
-                VaccinationDataMessage = "You have no valid vaccination data";
+                EidDataMessage = "You have no valid vaccination data";
             }
         }
     }

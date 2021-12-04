@@ -11,37 +11,37 @@ namespace EidCredentialsIssuer
 {
     public class EidCredentialsIssuerCredentialsService
     {
-        private readonly VaccinationDataMattrContext _EidCredentialsIssuerMattrContext;
+        private readonly EidDataMattrContext _eidDataMattrContext;
         private readonly MattrConfiguration _mattrConfiguration;
 
-        public EidCredentialsIssuerCredentialsService(VaccinationDataMattrContext EidCredentialsIssuerMattrContext,
+        public EidCredentialsIssuerCredentialsService(EidDataMattrContext eidDataMattrContext,
             IOptions<MattrConfiguration> mattrConfiguration)
         {
-            _EidCredentialsIssuerMattrContext = EidCredentialsIssuerMattrContext;
+            _eidDataMattrContext = eidDataMattrContext;
             _mattrConfiguration = mattrConfiguration.Value;
         }
 
-        public async Task<(string Callback, string DidId)> GetLastVaccineCredentialIssuer()
+        public async Task<(string Callback, string DidId)> GetLastEidCredentialIssuer()
         {
-            var vaccinationDataCredentials = await _EidCredentialsIssuerMattrContext
-                .VaccinationDataCredentials
+            var eidDataCredentials = await _eidDataMattrContext
+                .EidDataCredentials
                 .OrderBy(u => u.Id)
                 .LastOrDefaultAsync();
 
-            if (vaccinationDataCredentials != null)
+            if (eidDataCredentials != null)
             {
-                var callback = $"https://{_mattrConfiguration.TenantSubdomain}/ext/oidc/v1/issuers/{vaccinationDataCredentials.OidcIssuerId}/federated/callback";
-                var oidcCredentialIssuer = JsonConvert.DeserializeObject<V1_CreateOidcIssuerResponse>(vaccinationDataCredentials.OidcIssuer);
+                var callback = $"https://{_mattrConfiguration.TenantSubdomain}/ext/oidc/v1/issuers/{eidDataCredentials.OidcIssuerId}/federated/callback";
+                var oidcCredentialIssuer = JsonConvert.DeserializeObject<V1_CreateOidcIssuerResponse>(eidDataCredentials.OidcIssuer);
                 return (callback, oidcCredentialIssuer.Credential.IssuerDid);
             }
 
             return (string.Empty, string.Empty);
         }
 
-        public async Task<string> GetLastVaccinationDataCredentialIssuerUrl()
+        public async Task<string> GetLastEidDataCredentialIssuerUrl()
         {
-            var vaccinationData = await _EidCredentialsIssuerMattrContext
-                .VaccinationDataCredentials
+            var vaccinationData = await _eidDataMattrContext
+                .EidDataCredentials
                 .OrderBy(u => u.Id)
                 .LastOrDefaultAsync();
 
@@ -54,10 +54,10 @@ namespace EidCredentialsIssuer
             return string.Empty;
         }
 
-        public async Task<string> GetVaccinationDataCredentialIssuerUrl(string name)
+        public async Task<string> GetEidDataCredentialIssuerUrl(string name)
         {
-            var vaccinationData = await _EidCredentialsIssuerMattrContext
-                .VaccinationDataCredentials
+            var vaccinationData = await _eidDataMattrContext
+                .EidDataCredentials
                 .FirstOrDefaultAsync(dl => dl.Name == name);
 
             if (vaccinationData != null)
@@ -69,10 +69,10 @@ namespace EidCredentialsIssuer
             return string.Empty;
         }
 
-        public async Task CreateVaccinationData(VaccinationDataCredentials vaccinationDataCredentials)
+        public async Task CreateEidData(EidDataCredentials eidDataCredentials)
         {
-            _EidCredentialsIssuerMattrContext.VaccinationDataCredentials.Add(vaccinationDataCredentials);
-            await _EidCredentialsIssuerMattrContext.SaveChangesAsync();
+            _eidDataMattrContext.EidDataCredentials.Add(eidDataCredentials);
+            await _eidDataMattrContext.SaveChangesAsync();
         }
     }
 }

@@ -1,16 +1,16 @@
 # Verifiable credentials ZKP Vaccination Data
 
-creates drving license credentials
+creates E-ID credentials
 
 ## Database migrations create
 
 ### Console
 
-dotnet ef migrations add init_ndl 
+dotnet ef migrations add init_eid 
 
 ### Powershell
 
-Add-Migration "init_ndl" 
+Add-Migration "init_eid" 
 
 ## Database migrations update
 

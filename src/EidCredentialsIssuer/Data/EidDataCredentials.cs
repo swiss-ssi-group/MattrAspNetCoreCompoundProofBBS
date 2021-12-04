@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EidCredentialsIssuer.Data
 {
-    public class VaccinationDataCredentials
+    public class EidDataCredentials
     {
         [Key]
         public int Id { get; set; }

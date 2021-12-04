@@ -34,7 +34,7 @@ namespace EidCredentialsIssuer
             services.AddScoped<MattrCredentialsService>();
             services.AddScoped<EidCredentialsIssuerCredentialsService>();
 
-            services.AddDbContext<VaccinationDataMattrContext>(options =>
+            services.AddDbContext<EidDataMattrContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 

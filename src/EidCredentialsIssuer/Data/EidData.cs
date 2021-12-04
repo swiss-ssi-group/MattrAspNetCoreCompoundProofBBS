@@ -1,6 +1,6 @@
 ﻿namespace EidCredentialsIssuer.Data
 {
-    public class VaccinationData
+    public class EidData
     {
         public string FamilyName { get; set; }
         public string GivenName { get; set; }
