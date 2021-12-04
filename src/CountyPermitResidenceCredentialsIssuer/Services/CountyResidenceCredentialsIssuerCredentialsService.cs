@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace CountyResidenceCredentialsIssuer
 {
-    public class CountyPermitResidenceCredentialsIssuerCredentialsService
+    public class CountyResidenceCredentialsIssuerCredentialsService
     {
         private readonly CountyResidenceDataMattrContext _countyResidenceDataMattrContext;
         private readonly MattrConfiguration _mattrConfiguration;
 
-        public CountyPermitResidenceCredentialsIssuerCredentialsService(CountyResidenceDataMattrContext countyResidenceDataMattrContext,
+        public CountyResidenceCredentialsIssuerCredentialsService(CountyResidenceDataMattrContext countyResidenceDataMattrContext,
             IOptions<MattrConfiguration> mattrConfiguration)
         {
             _countyResidenceDataMattrContext = countyResidenceDataMattrContext;
@@ -24,7 +24,7 @@ namespace CountyResidenceCredentialsIssuer
         public async Task<(string Callback, string DidId)> GetLastCountyResidenceCredentialIssuer()
         {
             var countyResidenceDataCredentials = await _countyResidenceDataMattrContext
-                .EidDataCredentials
+                .CountyResidenceDataCredentials
                 .OrderBy(u => u.Id)
                 .LastOrDefaultAsync();
 
@@ -41,7 +41,7 @@ namespace CountyResidenceCredentialsIssuer
         public async Task<string> GetLastCountyResidenceDataCredentialIssuerUrl()
         {
             var countyResidenceData = await _countyResidenceDataMattrContext
-                .EidDataCredentials
+                .CountyResidenceDataCredentials
                 .OrderBy(u => u.Id)
                 .LastOrDefaultAsync();
 
@@ -57,7 +57,7 @@ namespace CountyResidenceCredentialsIssuer
         public async Task<string> GetCountyResidenceDataCredentialIssuerUrl(string name)
         {
             var countyResidenceData = await _countyResidenceDataMattrContext
-                .EidDataCredentials
+                .CountyResidenceDataCredentials
                 .FirstOrDefaultAsync(dl => dl.Name == name);
 
             if (countyResidenceData != null)
@@ -71,7 +71,7 @@ namespace CountyResidenceCredentialsIssuer
 
         public async Task CreateCountyResidenceData(CountyResidenceDataCredentials countyResidenceDataCredentials)
         {
-            _countyResidenceDataMattrContext.EidDataCredentials.Add(countyResidenceDataCredentials);
+            _countyResidenceDataMattrContext.CountyResidenceDataCredentials.Add(countyResidenceDataCredentials);
             await _countyResidenceDataMattrContext.SaveChangesAsync();
         }
     }

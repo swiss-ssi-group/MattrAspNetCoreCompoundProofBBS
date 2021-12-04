@@ -8,7 +8,7 @@ namespace CountyResidenceCredentialsIssuer.Pages
     public class AdminModel : PageModel
     {
         private readonly MattrCredentialsService _mattrCredentialsService;
-        public bool CreatingEidData { get; set; } = true;
+        public bool CreatingCountyResidenceData { get; set; } = true;
         public string Callback { get; set; }
 
         [BindProperty]
@@ -30,7 +30,7 @@ namespace CountyResidenceCredentialsIssuer.Pages
             }
 
             Callback = await _mattrCredentialsService.CreateCredentialsAndCallback(IssuerCredential.CredentialName);
-            CreatingEidData = false;
+            CreatingCountyResidenceData = false;
             return Page();
         }
     }

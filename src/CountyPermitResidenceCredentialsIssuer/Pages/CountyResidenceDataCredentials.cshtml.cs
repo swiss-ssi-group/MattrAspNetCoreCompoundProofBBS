@@ -1,32 +1,32 @@
+using CountyResidenceCredentialsIssuer.Data;
+using CountyResidenceCredentialsIssuer.Services;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 using System.Linq;
 using System.Threading.Tasks;
-using CountyResidenceCredentialsIssuer.Data;
-using CountyResidenceCredentialsIssuer.Services;
 
 namespace CountyResidenceCredentialsIssuer.Pages
 {
-    public class EidDataCredentialsModel : PageModel
+    public class CountyResidenceDataCredentialsModel : PageModel
     {
-        private readonly CountyPermitResidenceCredentialsIssuerCredentialsService _CountyPermitResidenceCredentialsIssuerCredentialsService;
+        private readonly CountyResidenceCredentialsIssuerCredentialsService _countyResidenceCredentialsIssuerCredentialsService;
         private readonly MattrConfiguration _mattrConfiguration;
 
         public string CountyResidenceDataMessage { get; set; } = "Loading credentials";
         public bool HasCountyResidenceData { get; set; } = false;
         public CountyResidenceData CountyResidenceData { get; set; }
         public string CredentialOfferUrl { get; set; }
-        public EidDataCredentialsModel(
-            CountyPermitResidenceCredentialsIssuerCredentialsService countyPermitResidenceCredentialsIssuerCredentialsService,
+        public CountyResidenceDataCredentialsModel(
+            CountyResidenceCredentialsIssuerCredentialsService countyResidenceCredentialsIssuerCredentialsService,
             IOptions<MattrConfiguration> mattrConfiguration)
         {
-            _CountyPermitResidenceCredentialsIssuerCredentialsService = countyPermitResidenceCredentialsIssuerCredentialsService;
+            _countyResidenceCredentialsIssuerCredentialsService = countyResidenceCredentialsIssuerCredentialsService;
             _mattrConfiguration = mattrConfiguration.Value;
         }
         public async Task OnGetAsync()
         {
 
-            var identityHasEidDataClaims = true;
+            var identityHasCountyResidenceDataClaims = true;
 
             var familyNameClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/family_name");
             var givenNameClaim = User.Claims.FirstOrDefault(t => t.Type == $"https://{_mattrConfiguration.TenantSubdomain}/given_name");
@@ -46,10 +46,10 @@ namespace CountyResidenceCredentialsIssuer.Pages
                 || streetAddressClaim == null
                 || postalCodeClaim == null)
             {
-                identityHasEidDataClaims = false;
+                identityHasCountyResidenceDataClaims = false;
             }
 
-            if (identityHasEidDataClaims)
+            if (identityHasCountyResidenceDataClaims)
             {
                 CountyResidenceData = new CountyResidenceData
                 {
@@ -63,10 +63,10 @@ namespace CountyResidenceCredentialsIssuer.Pages
                     PostalCode = postalCodeClaim.Value
                 };
                 // get per name
-                //var offerUrl = await _CountyPermitResidenceCredentialsIssuerCredentialsService.GetLastEidDataCredentialIssuerUrl("ndlseven");
+                //var offerUrl = await _CountyPermitResidenceCredentialsIssuerCredentialsService.GetLastCountyResidenceDataCredentialIssuerUrl("ndlseven");
 
                 // get the last one
-                var offerUrl = await _CountyPermitResidenceCredentialsIssuerCredentialsService.GetLastCountyResidenceDataCredentialIssuerUrl();
+                var offerUrl = await _countyResidenceCredentialsIssuerCredentialsService.GetLastCountyResidenceDataCredentialIssuerUrl();
 
                 CountyResidenceDataMessage = "Add your County Residence data credentials to your wallet";
                 CredentialOfferUrl = offerUrl;

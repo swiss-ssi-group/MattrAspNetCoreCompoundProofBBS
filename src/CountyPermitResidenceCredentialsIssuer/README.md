@@ -6,11 +6,11 @@ creates County Residence credentials
 
 ### Console
 
-dotnet ef migrations add init_eid 
+dotnet ef migrations add c
 
 ### Powershell
 
-Add-Migration "init_eid" 
+Add-Migration "init_countyResidence" 
 
 ## Database migrations update
 

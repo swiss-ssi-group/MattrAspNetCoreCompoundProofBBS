@@ -32,7 +32,7 @@ namespace CountyResidenceCredentialsIssuer
             services.Configure<MattrConfiguration>(Configuration.GetSection("MattrConfiguration"));
             services.AddScoped<MattrTokenApiService>();
             services.AddScoped<MattrCredentialsService>();
-            services.AddScoped<CountyPermitResidenceCredentialsIssuerCredentialsService>();
+            services.AddScoped<CountyResidenceCredentialsIssuerCredentialsService>();
 
             services.AddDbContext<CountyResidenceDataMattrContext>(options =>
                 options.UseSqlServer(

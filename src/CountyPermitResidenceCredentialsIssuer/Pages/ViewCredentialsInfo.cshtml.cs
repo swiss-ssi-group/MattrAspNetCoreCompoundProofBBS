@@ -5,21 +5,21 @@ namespace CountyResidenceCredentialsIssuer.Pages
 {
     public class ViewLastCredentialsInfoModel : PageModel
     {
-        private readonly CountyPermitResidenceCredentialsIssuerCredentialsService _CountyPermitResidenceCredentialsIssuerCredentialsService;
+        private readonly CountyResidenceCredentialsIssuerCredentialsService _countyResidenceCredentialsIssuerCredentialsService;
 
-        public string LatestEidDid { get; set; }
-        public string LatestEidDataCallback { get; set; }
+        public string LatestCountyResidenceDid { get; set; }
+        public string LatestCountyResidenceDataCallback { get; set; }
 
         public string CredentialOfferUrl { get; set; }
-        public ViewLastCredentialsInfoModel(CountyPermitResidenceCredentialsIssuerCredentialsService CountyPermitResidenceCredentialsIssuerCredentialsService)
+        public ViewLastCredentialsInfoModel(CountyResidenceCredentialsIssuerCredentialsService countyResidenceCredentialsIssuerCredentialsService)
         {
-            _CountyPermitResidenceCredentialsIssuerCredentialsService = CountyPermitResidenceCredentialsIssuerCredentialsService;
+            _countyResidenceCredentialsIssuerCredentialsService = countyResidenceCredentialsIssuerCredentialsService;
         }
         public async Task OnGetAsync()
         {
-            var credentialIssuer = await _CountyPermitResidenceCredentialsIssuerCredentialsService.GetLastCountyResidenceCredentialIssuer();
-            LatestEidDataCallback = credentialIssuer.Callback;
-            LatestEidDid = credentialIssuer.DidId;
+            var credentialIssuer = await _countyResidenceCredentialsIssuerCredentialsService.GetLastCountyResidenceCredentialIssuer();
+            LatestCountyResidenceDataCallback = credentialIssuer.Callback;
+            LatestCountyResidenceDid = credentialIssuer.DidId;
         }
     }
 }

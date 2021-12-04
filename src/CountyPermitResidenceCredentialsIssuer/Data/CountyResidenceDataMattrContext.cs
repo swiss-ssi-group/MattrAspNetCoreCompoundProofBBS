@@ -7,6 +7,6 @@ namespace CountyResidenceCredentialsIssuer.Data
         public CountyResidenceDataMattrContext(DbContextOptions<CountyResidenceDataMattrContext> options) : base(options)
         { }
 
-        public DbSet<CountyResidenceDataCredentials> EidDataCredentials { get; set; }
+        public DbSet<CountyResidenceDataCredentials> CountyResidenceDataCredentials { get; set; }
     }
 }

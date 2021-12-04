@@ -15,13 +15,13 @@ namespace CountyResidenceCredentialsIssuer
     public class MattrCredentialsService
     {
         private readonly IConfiguration _configuration;
-        private readonly CountyPermitResidenceCredentialsIssuerCredentialsService _CountyPermitResidenceCredentialsIssuerCredentialsService;
+        private readonly CountyResidenceCredentialsIssuerCredentialsService _CountyPermitResidenceCredentialsIssuerCredentialsService;
         private readonly IHttpClientFactory _clientFactory;
         private readonly MattrTokenApiService _mattrTokenApiService;
         private readonly MattrConfiguration _mattrConfiguration;
 
         public MattrCredentialsService(IConfiguration configuration,
-            CountyPermitResidenceCredentialsIssuerCredentialsService CountyPermitResidenceCredentialsIssuerCredentialsService,
+            CountyResidenceCredentialsIssuerCredentialsService CountyPermitResidenceCredentialsIssuerCredentialsService,
             IHttpClientFactory clientFactory,
             IOptions<MattrConfiguration> mattrConfiguration,
             MattrTokenApiService mattrTokenApiService)
@@ -36,11 +36,11 @@ namespace CountyResidenceCredentialsIssuer
         public async Task<string> CreateCredentialsAndCallback(string name)
         {
             // create a new one
-            var eidDataCredentials = await CreateMattrDidAndCredentialIssuer();
-            eidDataCredentials.Name = name;
-            await _CountyPermitResidenceCredentialsIssuerCredentialsService.CreateCountyResidenceData(eidDataCredentials);
+            var countyResidenceDataCredentials = await CreateMattrDidAndCredentialIssuer();
+            countyResidenceDataCredentials.Name = name;
+            await _CountyPermitResidenceCredentialsIssuerCredentialsService.CreateCountyResidenceData(countyResidenceDataCredentials);
 
-            var callback = $"https://{_mattrConfiguration.TenantSubdomain}/ext/oidc/v1/issuers/{eidDataCredentials.OidcIssuerId}/federated/callback";
+            var callback = $"https://{_mattrConfiguration.TenantSubdomain}/ext/oidc/v1/issuers/{countyResidenceDataCredentials.OidcIssuerId}/federated/callback";
             return callback;
         }
 
@@ -76,7 +76,7 @@ namespace CountyResidenceCredentialsIssuer
                 Credential = new Credential
                 {
                     IssuerDid = did.Did,
-                    Name = "EID",
+                    Name = "CountyResidence",
                     Context = new List<Uri> {
                         new Uri( "https://schema.org"),
                         new Uri( "https://www.w3.org/2018/credentials/v1")
