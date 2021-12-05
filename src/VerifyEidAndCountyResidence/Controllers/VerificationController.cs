@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using System.Text.Json;
 using System.Threading.Tasks;
 using VerifyEidAndCountyResidence.Services;
 
@@ -43,8 +44,11 @@ namespace VerifyEidAndCountyResidence.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> VerificationDataCallback([FromBody] VerifiedEidCountyResidenceData body)
+        public async Task<IActionResult> VerificationDataCallback()
         {
+            string content = await new System.IO.StreamReader(Request.Body).ReadToEndAsync();
+            var body = JsonSerializer.Deserialize<VerifiedEidCountyResidenceData>(content);
+
             string connectionId;
             var found = MattrVerifiedSuccessHub.Challenges
                 .TryGetValue(body.ChallengeId, out connectionId);
