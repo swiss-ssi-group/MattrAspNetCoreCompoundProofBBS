@@ -107,7 +107,7 @@ namespace VerifyEidAndCountyResidence
             return (walletUrl, challenge);
         }
 
-        private async Task<V1_CreatePresentationRequestResponse> InvokePresentationRequest(
+        private async Task<VerifyRequestResponse> InvokePresentationRequest(
             HttpClient client,
             string didId,
             string templateId,
@@ -134,10 +134,10 @@ namespace VerifyEidAndCountyResidence
                 if (response.StatusCode == System.Net.HttpStatusCode.Created)
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
-                    var v1CreatePresentationRequestResponse = JsonConvert.DeserializeObject<V1_CreatePresentationRequestResponse>(
+                    var verifyRequestResponse = JsonConvert.DeserializeObject<VerifyRequestResponse>(
                             responseContent);
 
-                    return v1CreatePresentationRequestResponse;
+                    return verifyRequestResponse;
                 }
 
                 var error = await response.Content.ReadAsStringAsync();
@@ -168,7 +168,7 @@ namespace VerifyEidAndCountyResidence
         private async Task<string> SignAndEncodePresentationRequestBody(
             HttpClient client,
             V1_GetDidResponse did,
-            V1_CreatePresentationRequestResponse v1CreatePresentationRequestResponse)
+            VerifyRequestResponse v1CreatePresentationRequestResponse)
         {
             var createDidUrl = $"https://{_mattrConfiguration.TenantSubdomain}/v1/messaging/sign";
 
