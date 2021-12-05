@@ -15,7 +15,7 @@ namespace VerifyEidAndCountyResidence
     {
         private readonly IHttpClientFactory _clientFactory;
         private readonly MattrTokenApiService _mattrTokenApiService;
-        private readonly VerifyEidCountyResidenceDbService _VerifyEidAndCountyResidenceDbService;
+        private readonly VerifyEidCountyResidenceDbService _verifyEidAndCountyResidenceDbService;
         private readonly MattrConfiguration _mattrConfiguration;
 
         public MattrPresentationTemplateService(IHttpClientFactory clientFactory,
@@ -25,7 +25,7 @@ namespace VerifyEidAndCountyResidence
         {
             _clientFactory = clientFactory;
             _mattrTokenApiService = mattrTokenApiService;
-            _VerifyEidAndCountyResidenceDbService = VerifyEidAndCountyResidenceDbService;
+            _verifyEidAndCountyResidenceDbService = VerifyEidAndCountyResidenceDbService;
             _mattrConfiguration = mattrConfiguration.Value;
         }
 
@@ -35,14 +35,14 @@ namespace VerifyEidAndCountyResidence
             var v1PresentationTemplateResponse = await CreateMattrPresentationTemplate(didEid, didCountyResidence);
 
             // save to db
-            var drivingLicensePresentationTemplate = new EidCountyResidenceDataPresentationTemplate
+            var template = new EidCountyResidenceDataPresentationTemplate
             {
                 DidEid = didEid,
                 DidCountyResidence = didCountyResidence,
                 TemplateId = v1PresentationTemplateResponse.Id,
                 MattrPresentationTemplateReponse = JsonConvert.SerializeObject(v1PresentationTemplateResponse)
             };
-            await _VerifyEidAndCountyResidenceDbService.CreateEidAndCountyResidenceDataTemplate(drivingLicensePresentationTemplate);
+            await _verifyEidAndCountyResidenceDbService.CreateEidAndCountyResidenceDataTemplate(template);
 
             return v1PresentationTemplateResponse.Id;
         }
@@ -83,7 +83,7 @@ namespace VerifyEidAndCountyResidence
             additionalPropertiesQuery.Add("credentialQuery", new List<CredentialQuery2> {
                 new CredentialQuery2
                 {
-                    Reason = "Please provide your vaccination data",
+                    Reason = "Please provide your E-ID and Residence data",
                     TrustedIssuer = new List<TrustedIssuer>{
                         new TrustedIssuer
                         {
@@ -114,7 +114,7 @@ namespace VerifyEidAndCountyResidence
             var payload = new MattrOpenApiClient.V1_CreatePresentationTemplate
             {
                 Domain = _mattrConfiguration.TenantSubdomain,
-                Name = "zkp-certificate-presentation-11",
+                Name = "zkp-eid-county-residence-1",
                 Query = new List<Query>
                 {
                     new Query
@@ -127,7 +127,7 @@ namespace VerifyEidAndCountyResidence
             var payloadJson = JsonConvert.SerializeObject(payload);
 
             var uri = new Uri(createPresentationsTemplatesUrl);
-
+           
             using (var content = new StringContentWithoutCharset(payloadJson, "application/json"))
             {
                 var presentationTemplateResponse = await client.PostAsync(uri, content);
