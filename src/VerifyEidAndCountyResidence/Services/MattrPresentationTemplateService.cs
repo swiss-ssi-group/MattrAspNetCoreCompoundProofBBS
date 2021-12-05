@@ -155,6 +155,11 @@ namespace VerifyEidAndCountyResidence
         [Newtonsoft.Json.JsonProperty("@explicit", Required = Newtonsoft.Json.Required.Always)]
         public bool Explicit { get; set; }
 
+        // Common
+        [Newtonsoft.Json.JsonProperty("date_of_birth", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public object DateOfBirth { get; set; } = new object();
+
         [Newtonsoft.Json.JsonProperty("family_name", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         public object FamilyName { get; set; } = new object();
@@ -163,28 +168,44 @@ namespace VerifyEidAndCountyResidence
         [System.ComponentModel.DataAnnotations.Required]
         public object GivenName { get; set; } = new object();
 
-        [Newtonsoft.Json.JsonProperty("date_of_birth", Required = Newtonsoft.Json.Required.Always)]
+        // E-ID
+
+        [Newtonsoft.Json.JsonProperty("birth_place", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
-        public object DateOfBirth { get; set; } = new object();
+        public object BirthPlace { get; set; } = new object();
 
-        [Newtonsoft.Json.JsonProperty("medicinal_product_code", Required = Newtonsoft.Json.Required.Always)]
+        [Newtonsoft.Json.JsonProperty("height", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
-        public object MedicinalProductCode { get; set; } = new object();
+        public object Height { get; set; } = new object();
 
-        //[Newtonsoft.Json.JsonProperty("number_of_doses", Required = Newtonsoft.Json.Required.Always)]
-        //[System.ComponentModel.DataAnnotations.Required]
-        //public object NumberOfDoses { get; set; } = new object();
+        [Newtonsoft.Json.JsonProperty("nationality", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public object Nationality { get; set; } = new object();
 
-        //[Newtonsoft.Json.JsonProperty("total_number_of_doses", Required = Newtonsoft.Json.Required.Always)]
-        //[System.ComponentModel.DataAnnotations.Required]
-        //public object TotalNumberOfDoses { get; set; } = new object();
+        [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public object Gender { get; set; } = new object();
 
-        //[Newtonsoft.Json.JsonProperty("vaccination_date", Required = Newtonsoft.Json.Required.Always)]
-        //[System.ComponentModel.DataAnnotations.Required]
-        //public object VaccinationDate { get; set; } = new object();
 
-        //[Newtonsoft.Json.JsonProperty("country_of_vaccination", Required = Newtonsoft.Json.Required.Always)]
-        //[System.ComponentModel.DataAnnotations.Required]
-        //public object CountryOfVaccination { get; set; } = new object();
+        // section Country Residence
+        [Newtonsoft.Json.JsonProperty("address_country", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public object AddressCountry { get; set; } = new object();
+
+        [Newtonsoft.Json.JsonProperty("address_locality", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public object AddressLocality { get; set; } = new object();
+
+        [Newtonsoft.Json.JsonProperty("address_region", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public object AddressRegion { get; set; } = new object();
+
+        [Newtonsoft.Json.JsonProperty("street_address", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public object StreetAddress { get; set; } = new object();
+
+        [Newtonsoft.Json.JsonProperty("postal_code", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public object PostalCode { get; set; } = new object();
     }
 }

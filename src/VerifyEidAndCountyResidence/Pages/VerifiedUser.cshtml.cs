@@ -23,12 +23,23 @@ namespace VerifyEidAndCountyResidence.Pages
                 var verifiedDataUser = await _verifyEidCountyResidenceDbService.GetVerifiedUser(challengeId);
                 VerifiedEidCountyResidenceDataClaims = new EidCountyResidenceVerifiedClaimsDto
                 {
+                    // Common
                     DateOfBirth = verifiedDataUser.DateOfBirth,
-                    MedicinalProductCode = verifiedDataUser.MedicinalProductCode,
                     FamilyName = verifiedDataUser.FamilyName,
                     GivenName = verifiedDataUser.GivenName,
-                    VaccinationDate = verifiedDataUser.VaccinationDate,
-                    CountryOfVaccination = verifiedDataUser.CountryOfVaccination
+
+                    //// E-ID
+                    //BirthPlace = verifiedDataUser.BirthPlace,
+                    //Height = verifiedDataUser.Height,
+                    //Nationality = verifiedDataUser.Nationality,
+                    //Gender = verifiedDataUser.Gender,
+
+                    //// County Residence
+                    //AddressCountry = verifiedDataUser.AddressCountry,
+                    //AddressLocality = verifiedDataUser.AddressLocality,
+                    //AddressRegion = verifiedDataUser.AddressRegion,
+                    //StreetAddress = verifiedDataUser.StreetAddress,
+                    //PostalCode = verifiedDataUser.PostalCode
                 };
             }
         }

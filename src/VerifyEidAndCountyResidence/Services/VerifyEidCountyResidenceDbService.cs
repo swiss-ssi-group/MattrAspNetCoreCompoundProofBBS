@@ -60,19 +60,29 @@ namespace VerifyEidAndCountyResidence
             var data = new VerifiedEidAndCountyResidenceData
             {
                 ClaimsId = item.Claims.Id,
-                //CountryOfVaccination = item.Claims.CountryOfVaccination,
-                DateOfBirth = item.Claims.DateOfBirth,
-                FamilyName = item.Claims.FamilyName,
-                GivenName = item.Claims.GivenName,
-                MedicinalProductCode = item.Claims.MedicinalProductCode,
-                //NumberOfDoses = item.Claims.NumberOfDoses,
-                //TotalNumberOfDoses = item.Claims.TotalNumberOfDoses,
-                //VaccinationDate = item.Claims.VaccinationDate,
-
                 ChallengeId = item.ChallengeId,
                 Holder = item.Holder,
                 PresentationType = item.PresentationType,
-                Verified = item.Verified
+                Verified = item.Verified,
+
+                // Common
+                DateOfBirth = item.Claims.DateOfBirth,
+                FamilyName = item.Claims.FamilyName,
+                GivenName = item.Claims.GivenName,
+
+                // E-ID
+                BirthPlace = item.Claims.BirthPlace,
+                Height = item.Claims.Height,
+                Nationality = item.Claims.Nationality,
+                Gender = item.Claims.Gender,
+
+                // County Residence
+                AddressCountry = item.Claims.AddressCountry,
+                AddressLocality = item.Claims.AddressLocality,
+                AddressRegion = item.Claims.AddressRegion,
+                StreetAddress = item.Claims.StreetAddress,
+                PostalCode = item.Claims.PostalCode
+
             };
 
             _verifyEidCountyResidenceMattrContext.VerifiedEidAndCountyResidenceData.Add(data);

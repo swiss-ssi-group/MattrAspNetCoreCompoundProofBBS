@@ -20,9 +20,6 @@ namespace VerifyEidAndCountyResidence.Controllers
     {
         public string Id { get; set; }
 
-        //[JsonPropertyName("http://schema.org/country_of_vaccination")]
-        //public string CountryOfVaccination { get; set; }
-
         [JsonPropertyName("http://schema.org/date_of_birth")]
         public string DateOfBirth { get; set; }
 
@@ -32,16 +29,32 @@ namespace VerifyEidAndCountyResidence.Controllers
         [JsonPropertyName("http://schema.org/given_name")]
         public string GivenName { get; set; }
 
-        [JsonPropertyName("http://schema.org/medicinal_product_code")]
-        public string MedicinalProductCode { get; set; }
+        // section E-ID
+        [JsonPropertyName("http://schema.org/birth_place")]
+        public string BirthPlace { get; set; }
 
-        //[JsonPropertyName("http://schema.org/number_of_doses")]
-        //public string NumberOfDoses { get; set; }
+        [JsonPropertyName("http://schema.org/height")]
+        public string Height { get; set; }
 
-        //[JsonPropertyName("http://schema.org/total_number_of_doses")]
-        //public string TotalNumberOfDoses { get; set; }
+        [JsonPropertyName("http://schema.org/nationality")]
+        public string Nationality { get; set; }
 
-        //[JsonPropertyName("http://schema.org/vaccination_date")]
-        //public string VaccinationDate { get; set; }
+        [JsonPropertyName("http://schema.org/gender")]
+        public string Gender { get; set; }
+
+        // section Country Residence
+        [JsonPropertyName("http://schema.org/address_country")]
+        public string AddressCountry { get; set; }
+
+        [JsonPropertyName("http://schema.org/address_locality")]
+        public string AddressLocality { get; set; }
+
+        [JsonPropertyName("http://schema.org/address_region")]
+        public string AddressRegion { get; set; }
+        [JsonPropertyName("http://schema.org/street_address")]
+        public string StreetAddress { get; set; }
+
+        [JsonPropertyName("http://schema.org/postal_code")]
+        public string PostalCode { get; set; }
     }
 }
