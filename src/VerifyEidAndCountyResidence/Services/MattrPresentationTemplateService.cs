@@ -139,7 +139,7 @@ namespace VerifyEidAndCountyResidence
             var payload = new MattrOpenApiClient.V1_CreatePresentationTemplate
             {
                 Domain = _mattrConfiguration.TenantSubdomain,
-                Name = "zkp-eid-county-residence-2",
+                Name = "zkp-eid-county-residence-3",
                 Query = new List<Query>
                 {
                     new Query
@@ -180,11 +180,6 @@ namespace VerifyEidAndCountyResidence
         [Newtonsoft.Json.JsonProperty("@explicit", Required = Newtonsoft.Json.Required.Always)]
         public bool Explicit { get; set; }
 
-        // Common
-        [Newtonsoft.Json.JsonProperty("date_of_birth", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public object DateOfBirth { get; set; } = new object();
-
         [Newtonsoft.Json.JsonProperty("family_name", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         public object FamilyName { get; set; } = new object();
@@ -193,7 +188,9 @@ namespace VerifyEidAndCountyResidence
         [System.ComponentModel.DataAnnotations.Required]
         public object GivenName { get; set; } = new object();
 
-        // E-ID
+        [Newtonsoft.Json.JsonProperty("date_of_birth", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public object DateOfBirth { get; set; } = new object();
 
         [Newtonsoft.Json.JsonProperty("birth_place", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -217,11 +214,6 @@ namespace VerifyEidAndCountyResidence
         [Newtonsoft.Json.JsonProperty("@explicit", Required = Newtonsoft.Json.Required.Always)]
         public bool Explicit { get; set; }
 
-        // Common
-        [Newtonsoft.Json.JsonProperty("date_of_birth", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public object DateOfBirth { get; set; } = new object();
-
         [Newtonsoft.Json.JsonProperty("family_name", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         public object FamilyName { get; set; } = new object();
@@ -230,7 +222,10 @@ namespace VerifyEidAndCountyResidence
         [System.ComponentModel.DataAnnotations.Required]
         public object GivenName { get; set; } = new object();
 
-        // section Country Residence
+        [Newtonsoft.Json.JsonProperty("date_of_birth", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public object DateOfBirth { get; set; } = new object();
+
         [Newtonsoft.Json.JsonProperty("address_country", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         public object AddressCountry { get; set; } = new object();
