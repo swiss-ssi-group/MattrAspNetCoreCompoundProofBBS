@@ -102,44 +102,48 @@ namespace VerifyEidAndCountyResidence
                     {
                         Context = new List<object>{
                             "https://www.w3.org/2018/credentials/v1",
-                            "https://w3c-ccg.github.io/ldp-bbs2020/context/v1",
+                            "https://w3id.org/security/bbs/v1",
+                            "https://mattr.global/contexts/vc-extensions/v1",
                             "https://schema.org",
+                            "https://w3id.org/vc-revocation-list-2020/v1"
                         },
                         Type = "VerifiableCredential",
                         AdditionalProperties = eidAdditionalPropertiesCredentialSubject
 
                     },
                     AdditionalProperties = additionalPropertiesCredentialQuery
-                }
-                //new CredentialQuery2
-                //{
-                //    Reason = "Please provide your Residence data",
-                //    TrustedIssuer = new List<TrustedIssuer>{
-                //        new TrustedIssuer
-                //        {
-                //            Required = true,
-                //            Issuer = didCountyResidence // DID used to create the oidc
-                //        }
-                //    },
-                //    Frame = new Frame
-                //    {
-                //        Context = new List<object>{
-                //            "https://www.w3.org/2018/credentials/v1",
-                //            "https://w3c-ccg.github.io/ldp-bbs2020/context/v1",
-                //            "https://schema.org",
-                //        },
-                //        Type = "VerifiableCredential",
-                //        AdditionalProperties = countyResidenceAdditionalPropertiesCredentialSubject
+                },
+                new CredentialQuery2
+                {
+                    Reason = "Please provide your Residence data",
+                    TrustedIssuer = new List<TrustedIssuer>{
+                        new TrustedIssuer
+                        {
+                            Required = true,
+                            Issuer = didCountyResidence // DID used to create the oidc
+                        }
+                    },
+                    Frame = new Frame
+                    {
+                        Context = new List<object>{
+                            "https://www.w3.org/2018/credentials/v1",
+                            "https://w3id.org/security/bbs/v1",
+                            "https://mattr.global/contexts/vc-extensions/v1",
+                            "https://schema.org",
+                            "https://w3id.org/vc-revocation-list-2020/v1"
+                        },
+                        Type = "VerifiableCredential",
+                        AdditionalProperties = countyResidenceAdditionalPropertiesCredentialSubject
 
-                //    },
-                //    AdditionalProperties = additionalPropertiesCredentialQuery
-                //}
+                    },
+                    AdditionalProperties = additionalPropertiesCredentialQuery
+                }
             });
 
             var payload = new MattrOpenApiClient.V1_CreatePresentationTemplate
             {
                 Domain = _mattrConfiguration.TenantSubdomain,
-                Name = "zkp-eid-county-residence-eid",
+                Name = "zkp-eid-county-residence-compound",
                 Query = new List<Query>
                 {
                     new Query
