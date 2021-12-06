@@ -69,11 +69,18 @@ namespace VerifyEidAndCountyResidence
 
             var createPresentationsTemplatesUrl = $"https://{_mattrConfiguration.TenantSubdomain}/v1/presentations/templates";
 
-            var additionalPropertiesCredentialSubject = new Dictionary<string, object>();
-            additionalPropertiesCredentialSubject.Add("credentialSubject", new VaccanationDataCredentialSubject
+            var eidAdditionalPropertiesCredentialSubject = new Dictionary<string, object>();
+            eidAdditionalPropertiesCredentialSubject.Add("credentialSubject", new EidDataCredentialSubject
             {
                 Explicit = true
             });
+
+            var countyResidenceAdditionalPropertiesCredentialSubject = new Dictionary<string, object>();
+            countyResidenceAdditionalPropertiesCredentialSubject.Add("credentialSubject", new CountyResidenceDataCredentialSubject
+            {
+                Explicit = true
+            });
+            
 
             var additionalPropertiesCredentialQuery = new Dictionary<string, object>();
             additionalPropertiesCredentialQuery.Add("required", true);
@@ -83,13 +90,31 @@ namespace VerifyEidAndCountyResidence
             additionalPropertiesQuery.Add("credentialQuery", new List<CredentialQuery2> {
                 new CredentialQuery2
                 {
-                    Reason = "Please provide your E-ID and Residence data",
+                    Reason = "Please provide your E-ID",
                     TrustedIssuer = new List<TrustedIssuer>{
                         new TrustedIssuer
                         {
                             Required = true,
                             Issuer = didEid // DID used to create the oidc
+                        }
+                    },
+                    Frame = new Frame
+                    {
+                        Context = new List<object>{
+                            "https://www.w3.org/2018/credentials/v1",
+                            "https://w3c-ccg.github.io/ldp-bbs2020/context/v1",
+                            "https://schema.org",
                         },
+                        Type = "VerifiableCredential",
+                        AdditionalProperties = eidAdditionalPropertiesCredentialSubject
+
+                    },
+                    AdditionalProperties = additionalPropertiesCredentialQuery
+                },
+                new CredentialQuery2
+                {
+                    Reason = "Please provide your Residence data",
+                    TrustedIssuer = new List<TrustedIssuer>{
                         new TrustedIssuer
                         {
                             Required = true,
@@ -104,7 +129,7 @@ namespace VerifyEidAndCountyResidence
                             "https://schema.org",
                         },
                         Type = "VerifiableCredential",
-                        AdditionalProperties = additionalPropertiesCredentialSubject
+                        AdditionalProperties = countyResidenceAdditionalPropertiesCredentialSubject
 
                     },
                     AdditionalProperties = additionalPropertiesCredentialQuery
@@ -114,7 +139,7 @@ namespace VerifyEidAndCountyResidence
             var payload = new MattrOpenApiClient.V1_CreatePresentationTemplate
             {
                 Domain = _mattrConfiguration.TenantSubdomain,
-                Name = "zkp-eid-county-residence-1",
+                Name = "zkp-eid-county-residence-2",
                 Query = new List<Query>
                 {
                     new Query
@@ -150,7 +175,7 @@ namespace VerifyEidAndCountyResidence
         }
     }
 
-    public class VaccanationDataCredentialSubject
+    public class EidDataCredentialSubject
     {
         [Newtonsoft.Json.JsonProperty("@explicit", Required = Newtonsoft.Json.Required.Always)]
         public bool Explicit { get; set; }
@@ -185,7 +210,25 @@ namespace VerifyEidAndCountyResidence
         [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         public object Gender { get; set; } = new object();
+    }
 
+    public class CountyResidenceDataCredentialSubject
+    {
+        [Newtonsoft.Json.JsonProperty("@explicit", Required = Newtonsoft.Json.Required.Always)]
+        public bool Explicit { get; set; }
+
+        // Common
+        [Newtonsoft.Json.JsonProperty("date_of_birth", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public object DateOfBirth { get; set; } = new object();
+
+        [Newtonsoft.Json.JsonProperty("family_name", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public object FamilyName { get; set; } = new object();
+
+        [Newtonsoft.Json.JsonProperty("given_name", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public object GivenName { get; set; } = new object();
 
         // section Country Residence
         [Newtonsoft.Json.JsonProperty("address_country", Required = Newtonsoft.Json.Required.Always)]
