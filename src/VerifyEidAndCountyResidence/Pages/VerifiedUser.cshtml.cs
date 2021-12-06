@@ -28,18 +28,18 @@ namespace VerifyEidAndCountyResidence.Pages
                     FamilyName = verifiedDataUser.FamilyName,
                     GivenName = verifiedDataUser.GivenName,
 
-                    //// E-ID
-                    //BirthPlace = verifiedDataUser.BirthPlace,
-                    //Height = verifiedDataUser.Height,
-                    //Nationality = verifiedDataUser.Nationality,
-                    //Gender = verifiedDataUser.Gender,
+                    // E-ID
+                    BirthPlace = verifiedDataUser.BirthPlace,
+                    Height = verifiedDataUser.Height,
+                    Nationality = verifiedDataUser.Nationality,
+                    Gender = verifiedDataUser.Gender,
 
-                    //// County Residence
-                    //AddressCountry = verifiedDataUser.AddressCountry,
-                    //AddressLocality = verifiedDataUser.AddressLocality,
-                    //AddressRegion = verifiedDataUser.AddressRegion,
-                    //StreetAddress = verifiedDataUser.StreetAddress,
-                    //PostalCode = verifiedDataUser.PostalCode
+                    // County Residence
+                    AddressCountry = verifiedDataUser.AddressCountry,
+                    AddressLocality = verifiedDataUser.AddressLocality,
+                    AddressRegion = verifiedDataUser.AddressRegion,
+                    StreetAddress = verifiedDataUser.StreetAddress,
+                    PostalCode = verifiedDataUser.PostalCode
                 };
             }
         }
@@ -47,11 +47,18 @@ namespace VerifyEidAndCountyResidence.Pages
 
     public class EidCountyResidenceVerifiedClaimsDto
     {
-        public string MedicinalProductCode { get; set; }
         public string GivenName { get; set; }
         public string FamilyName { get; set; }
         public string DateOfBirth { get; set; }
-        public string VaccinationDate { get; set; }
-        public string CountryOfVaccination { get; set; }
+        public string BirthPlace { get; set; }
+        public string Height { get; set; }
+        public string Nationality { get; set; }
+        public string Gender { get; set; }
+
+        public string AddressCountry { get; set; }
+        public string AddressLocality { get; set; }
+        public string AddressRegion { get; set; }
+        public string StreetAddress { get; set; }
+        public string PostalCode { get; set; }
     }
 }

@@ -13,19 +13,19 @@
                     <b>Verified E-ID and County Residence Data for:@Html.DisplayFor(model => model.VerifiedEidCountyResidenceDataClaims.GivenName) @Html.DisplayFor(model => model.VerifiedEidCountyResidenceDataClaims.FamilyName)</b>
                     <hr />
                     <dl class="row">
-                        @*<dt class="col-sm-4">Vaccinated in @Model.VerifiedVaccinationDataClaims.CountryOfVaccination on:</dt>
-                        <dd class="col-sm-8">
-                            @Model.VerifiedVaccinationDataClaims.VaccinationDate
-                        </dd>*@
-                        <dt class="col-sm-4">
-                            @Html.DisplayNameFor(model => model.VerifiedEidCountyResidenceDataClaims.MedicinalProductCode)
-                        </dt>
-                        <dd class="col-sm-8">
-                            @Html.DisplayFor(model => model.VerifiedEidCountyResidenceDataClaims.MedicinalProductCode)
-                        </dd>
-                        <dt class="col-sm-4">Date of Birth</dt>
+                        <dt class="col-sm-4">Nationality: @Model.VerifiedEidCountyResidenceDataClaims.Nationality born: @Model.VerifiedEidCountyResidenceDataClaims.BirthPlace</dt>
                         <dd class="col-sm-8">
                             @Model.VerifiedEidCountyResidenceDataClaims.DateOfBirth
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.VerifiedEidCountyResidenceDataClaims.GivenName)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.VerifiedEidCountyResidenceDataClaims.FamilyName)
+                        </dd>
+                        <dt class="col-sm-4">AddressCountry</dt>
+                        <dd class="col-sm-8">
+                            @Model.VerifiedEidCountyResidenceDataClaims.AddressCountry
                         </dd>
                     </dl>
                 </div>
