@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -50,13 +52,16 @@ namespace VerifyEidAndCountyResidence.Pages
             CreatingVerifier = false;
 
             var walletUrl = result.WalletUrl.Trim();
-            ChallengeId = result.ChallengeId.Replace("#", "h");
-            VerificationRedirectController.WalletUrls.Add(ChallengeId, walletUrl);
+            ChallengeId = result.ChallengeId;
+            var valueBytes = Encoding.UTF8.GetBytes(ChallengeId);
+            var challengeIdBase64 = Convert.ToBase64String(valueBytes);
+
+            VerificationRedirectController.WalletUrls.Add(challengeIdBase64, walletUrl);
 
             // https://learn.mattr.global/tutorials/verify/using-callback/callback-e-to-e#redirect-urls
             //var qrCodeUrl = $"didcomm://{walletUrl}";
 
-            QrCodeUrl = $"didcomm://https://{HttpContext.Request.Host.Value}/VerificationRedirect/{ChallengeId}";
+            QrCodeUrl = $"didcomm://https://{HttpContext.Request.Host.Value}/VerificationRedirect/{challengeIdBase64}";
             return Page();
         }
     }

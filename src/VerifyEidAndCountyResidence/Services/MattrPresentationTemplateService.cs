@@ -110,36 +110,36 @@ namespace VerifyEidAndCountyResidence
 
                     },
                     AdditionalProperties = additionalPropertiesCredentialQuery
-                },
-                new CredentialQuery2
-                {
-                    Reason = "Please provide your Residence data",
-                    TrustedIssuer = new List<TrustedIssuer>{
-                        new TrustedIssuer
-                        {
-                            Required = true,
-                            Issuer = didCountyResidence // DID used to create the oidc
-                        }
-                    },
-                    Frame = new Frame
-                    {
-                        Context = new List<object>{
-                            "https://www.w3.org/2018/credentials/v1",
-                            "https://w3c-ccg.github.io/ldp-bbs2020/context/v1",
-                            "https://schema.org",
-                        },
-                        Type = "VerifiableCredential",
-                        AdditionalProperties = countyResidenceAdditionalPropertiesCredentialSubject
-
-                    },
-                    AdditionalProperties = additionalPropertiesCredentialQuery
                 }
+                //new CredentialQuery2
+                //{
+                //    Reason = "Please provide your Residence data",
+                //    TrustedIssuer = new List<TrustedIssuer>{
+                //        new TrustedIssuer
+                //        {
+                //            Required = true,
+                //            Issuer = didCountyResidence // DID used to create the oidc
+                //        }
+                //    },
+                //    Frame = new Frame
+                //    {
+                //        Context = new List<object>{
+                //            "https://www.w3.org/2018/credentials/v1",
+                //            "https://w3c-ccg.github.io/ldp-bbs2020/context/v1",
+                //            "https://schema.org",
+                //        },
+                //        Type = "VerifiableCredential",
+                //        AdditionalProperties = countyResidenceAdditionalPropertiesCredentialSubject
+
+                //    },
+                //    AdditionalProperties = additionalPropertiesCredentialQuery
+                //}
             });
 
             var payload = new MattrOpenApiClient.V1_CreatePresentationTemplate
             {
                 Domain = _mattrConfiguration.TenantSubdomain,
-                Name = "zkp-eid-county-residence-3",
+                Name = "zkp-eid-county-residence-eid",
                 Query = new List<Query>
                 {
                     new Query
