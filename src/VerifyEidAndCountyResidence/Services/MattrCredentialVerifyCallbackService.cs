@@ -67,7 +67,7 @@ namespace VerifyEidAndCountyResidence
                 new AuthenticationHeaderValue("Bearer", accessToken);
             client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
 
-            var template = await _VerifyEidAndCountyResidenceDbService.GetLastVaccinationDataPresentationTemplate();
+            var template = await _VerifyEidAndCountyResidenceDbService.GetLastPresentationTemplate();
 
             var didToVerify = await _mattrCreateDidService.GetDidOrCreate("did_for_verify");
             // Request DID from ledger

@@ -15,7 +15,7 @@ namespace VerifyEidAndCountyResidence
             _verifyEidCountyResidenceMattrContext = verifyEidAndCountyResidenceMattrContext;
         }
 
-        public async Task<(string DidEid, string DidCountyResidence, string TemplateId)> GetLastVaccinationDataPresentationTemplate()
+        public async Task<(string DidEid, string DidCountyResidence, string TemplateId)> GetLastPresentationTemplate()
         {
             var eidCountyResidenceTemplate = await _verifyEidCountyResidenceMattrContext
                 .EidAndCountyResidenceDataPresentationTemplates
