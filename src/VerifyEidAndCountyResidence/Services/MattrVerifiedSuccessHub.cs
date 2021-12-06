@@ -10,9 +10,9 @@ namespace VerifyEidAndCountyResidence.Services
         /// </summary>
         public static readonly ConcurrentDictionary<string, string> Challenges = new ConcurrentDictionary<string, string>();
 
-        public void AddChallenge(string challengeId, string connnectionId)
+        public void AddChallenge(string base64ChallengeId, string connnectionId)
         {
-            Challenges.TryAdd(challengeId, connnectionId);
+            Challenges.TryAdd(base64ChallengeId, connnectionId);
         }
 
     }

@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace VerifyEidAndCountyResidence.Pages
@@ -12,14 +14,17 @@ namespace VerifyEidAndCountyResidence.Pages
             _verifyEidCountyResidenceDbService = verifyEidCountyResidenceDbService;
         }
 
-        public string ChallengeId { get; set; }
+        public string Base64ChallengeId { get; set; }
         public EidCountyResidenceVerifiedClaimsDto VerifiedEidCountyResidenceDataClaims { get; private set; }
 
-        public async Task OnGetAsync(string challengeId)
+        public async Task OnGetAsync(string base64ChallengeId)
         {
             // user query param to get challenge id and display data
-            if (challengeId != null)
+            if (base64ChallengeId != null)
             {
+                var valueBytes = Convert.FromBase64String(base64ChallengeId);
+                var challengeId = Encoding.UTF8.GetString(valueBytes);
+
                 var verifiedDataUser = await _verifyEidCountyResidenceDbService.GetVerifiedUser(challengeId);
                 VerifiedEidCountyResidenceDataClaims = new EidCountyResidenceVerifiedClaimsDto
                 {

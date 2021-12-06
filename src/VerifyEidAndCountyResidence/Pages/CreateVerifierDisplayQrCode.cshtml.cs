@@ -19,6 +19,9 @@ namespace VerifyEidAndCountyResidence.Pages
         public string ChallengeId { get; set; }
 
         [BindProperty]
+        public string Base64ChallengeId { get; set; }
+
+        [BindProperty]
         public CreateVerifierDisplayQrCodeCallbackUrl CallbackUrlDto { get; set; }
         public CreateVerifierDisplayQrCodeModel(MattrCredentialVerifyCallbackService mattrCredentialVerifyCallbackService)
         {
@@ -53,14 +56,14 @@ namespace VerifyEidAndCountyResidence.Pages
             var walletUrl = result.WalletUrl.Trim();
             ChallengeId = result.ChallengeId;
             var valueBytes = Encoding.UTF8.GetBytes(ChallengeId);
-            var challengeIdBase64 = Convert.ToBase64String(valueBytes);
+            Base64ChallengeId = Convert.ToBase64String(valueBytes);
 
-            VerificationRedirectController.WalletUrls.Add(challengeIdBase64, walletUrl);
+            VerificationRedirectController.WalletUrls.Add(Base64ChallengeId, walletUrl);
 
             // https://learn.mattr.global/tutorials/verify/using-callback/callback-e-to-e#redirect-urls
             //var qrCodeUrl = $"didcomm://{walletUrl}";
 
-            QrCodeUrl = $"didcomm://https://{HttpContext.Request.Host.Value}/VerificationRedirect/{challengeIdBase64}";
+            QrCodeUrl = $"didcomm://https://{HttpContext.Request.Host.Value}/VerificationRedirect/{Base64ChallengeId}";
             return Page();
         }
     }
