@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using System;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using VerifyEidAndCountyResidence.Services;
@@ -22,23 +24,27 @@ namespace VerifyEidAndCountyResidence.Controllers
         }
 
         /// <summary>
-        ///{
-        ///    "presentationType": "QueryByFrame",
-        ///    "challengeId": "RhOtpTa8vNh1EId6sJ7AVD3prerMMDSkfWZrUPzt",
-        ///    "claims": {
-        ///        "id": "did:key:z6MkmGHPWdKjLqiTydLHvRRdHPNDdUDKDudjiF87RNFjM2fb",
-        ///        "http://schema.org/country_of_vaccination": "CH",
-        ///        "http://schema.org/date_of_birth": "1953-07-21",
-        ///        "http://schema.org/family_name": "Bob",
-        ///        "http://schema.org/given_name": "Lammy",
-        ///        "http://schema.org/medicinal_product_code": "Pfizer/BioNTech Comirnaty EU/1/20/1528",
-        ///        "http://schema.org/number_of_doses": "2",
-        ///        "http://schema.org/total_number_of_doses": "2",
-        ///        "http://schema.org/vaccination_date": "2021-05-12"
-        ///    },
-        ///    "verified": true,
-        ///    "holder": "did:key:z6MkmGHPWdKjLqiTydLHvRRdHPNDdUDKDudjiF87RNFjM2fb"
-        ///}
+        ///  {
+        ///	 "presentationType": "QueryByFrame",
+        ///	 "challengeId": "nGu/E6eQ8AraHzWyB/kluudUhraB8GybC3PNHyZI",
+        ///	 "claims": {
+        ///		"id": "did:key:z6MkmGHPWdKjLqiTydLHvRRdHPNDdUDKDudjiF87RNFjM2fb",
+        ///		"http://schema.org/birth_place": "Seattle",
+        ///		"http://schema.org/date_of_birth": "1953-07-21",
+        ///		"http://schema.org/family_name": "Bob",
+        ///		"http://schema.org/gender": "Male",
+        ///		"http://schema.org/given_name": "Lammy",
+        ///		"http://schema.org/height": "176cm",
+        ///		"http://schema.org/nationality": "USA",
+        ///		"http://schema.org/address_country": "Schweiz",
+        ///		"http://schema.org/address_locality": "Thun",
+        ///		"http://schema.org/address_region": "Bern",
+        ///		"http://schema.org/postal_code": "3000",
+        ///		"http://schema.org/street_address": "Thunerstrasse 14"
+        ///	 },
+        ///	 "verified": true,
+        ///	 "holder": "did:key:z6MkmGHPWdKjLqiTydLHvRRdHPNDdUDKDudjiF87RNFjM2fb"
+        ///  }
         /// </summary>
         /// <param name="body"></param>
         /// <returns></returns>
@@ -49,12 +55,15 @@ namespace VerifyEidAndCountyResidence.Controllers
             string content = await new System.IO.StreamReader(Request.Body).ReadToEndAsync();
             var body = JsonSerializer.Deserialize<VerifiedEidCountyResidenceData>(content);
 
+            var valueBytes = Encoding.UTF8.GetBytes(body.ChallengeId);
+            var base64ChallengeId = Convert.ToBase64String(valueBytes);
+
             string connectionId;
             var found = MattrVerifiedSuccessHub.Challenges
-                .TryGetValue(body.ChallengeId, out connectionId);
+                .TryGetValue(base64ChallengeId, out connectionId);
 
-            // test Signalr
-            //await _hubContext.Clients.Client(connectionId).SendAsync("MattrCallbackSuccess", $"{body.ChallengeId}");
+            //test Signalr
+            //await _hubContext.Clients.Client(connectionId).SendAsync("MattrCallbackSuccess", $"{base64ChallengeId}");
             //return Ok();
 
             var exists = await _verifyEidAndCountyResidenceDbService.ChallengeExists(body.ChallengeId);
@@ -65,10 +74,10 @@ namespace VerifyEidAndCountyResidence.Controllers
 
                 if (found)
                 {
-                    //$"/VerifiedUser?challengeid={body.ChallengeId}"
+                    //$"/VerifiedUser?base64ChallengeId={base64ChallengeId}"
                     await _hubContext.Clients
                         .Client(connectionId)
-                        .SendAsync("MattrCallbackSuccess", $"{body.ChallengeId}");
+                        .SendAsync("MattrCallbackSuccess", $"{base64ChallengeId}");
                 }
 
                 return Ok();

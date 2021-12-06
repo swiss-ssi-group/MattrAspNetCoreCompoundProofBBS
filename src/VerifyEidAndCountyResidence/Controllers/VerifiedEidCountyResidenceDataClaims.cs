@@ -3,21 +3,31 @@
 namespace VerifyEidAndCountyResidence.Controllers
 {
     /// <summary>
-    /// This class totally depends on the OIDC credential issuer claims
-    ///    "claims": {
-    ///        "id": "did:key:z6MkmGHPWdKjLqiTydLHvRRdHPNDdUDKDudjiF87RNFjM2fb",
-    ///        "http://schema.org/country_of_vaccination": "CH",
-    ///        "http://schema.org/date_of_birth": "1953-07-21",
-    ///        "http://schema.org/family_name": "Bob",
-    ///        "http://schema.org/given_name": "Lammy",
-    ///        "http://schema.org/medicinal_product_code": "Pfizer/BioNTech Comirnaty EU/1/20/1528",
-    ///        "http://schema.org/number_of_doses": "2",
-    ///        "http://schema.org/total_number_of_doses": "2",
-    ///        "http://schema.org/vaccination_date": "2021-05-12"
-    ///    },
+    ///  {
+    ///	 "presentationType": "QueryByFrame",
+    ///	 "challengeId": "nGu/E6eQ8AraHzWyB/kluudUhraB8GybC3PNHyZI",
+    ///	 "claims": {
+    ///		"id": "did:key:z6MkmGHPWdKjLqiTydLHvRRdHPNDdUDKDudjiF87RNFjM2fb",
+    ///		"http://schema.org/birth_place": "Seattle",
+    ///		"http://schema.org/date_of_birth": "1953-07-21",
+    ///		"http://schema.org/family_name": "Bob",
+    ///		"http://schema.org/gender": "Male",
+    ///		"http://schema.org/given_name": "Lammy",
+    ///		"http://schema.org/height": "176cm",
+    ///		"http://schema.org/nationality": "USA",
+    ///		"http://schema.org/address_country": "Schweiz",
+    ///		"http://schema.org/address_locality": "Thun",
+    ///		"http://schema.org/address_region": "Bern",
+    ///		"http://schema.org/postal_code": "3000",
+    ///		"http://schema.org/street_address": "Thunerstrasse 14"
+    ///	 },
+    ///	 "verified": true,
+    ///	 "holder": "did:key:z6MkmGHPWdKjLqiTydLHvRRdHPNDdUDKDudjiF87RNFjM2fb"
+    ///  }
     /// </summary>
     public class VerifiedEidCountyResidenceDataClaims
     {
+        [JsonPropertyName("id")]
         public string Id { get; set; }
 
         [JsonPropertyName("http://schema.org/date_of_birth")]
