@@ -50,7 +50,7 @@ namespace VerifyEidAndCountyResidence.Pages
             CreatingVerifier = false;
 
             var walletUrl = result.WalletUrl.Trim();
-            ChallengeId = result.ChallengeId;
+            ChallengeId = result.ChallengeId.Replace("#", "h");
             VerificationRedirectController.WalletUrls.Add(ChallengeId, walletUrl);
 
             // https://learn.mattr.global/tutorials/verify/using-callback/callback-e-to-e#redirect-urls
