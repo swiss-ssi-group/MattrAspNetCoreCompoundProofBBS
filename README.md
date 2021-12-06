@@ -1,6 +1,6 @@
 [![.NET](https://github.com/swiss-ssi-group/MattrZeroKnowledgeProofsAspNetCore/actions/workflows/dotnet.yml/badge.svg)](https://github.com/swiss-ssi-group/MattrZeroKnowledgeProofsAspNetCore/actions/workflows/dotnet.yml)
 
-# MATTR Global ASP.NET Core
+# Mattr ASP.NET Core Compound Proof BBS+ demo
 
 ## Blogs
 
@@ -123,13 +123,13 @@ function (user, context, callback) {
 ### Console
 
 ```
-dotnet ef migrations add vaccine_vc_issuer_init
+dotnet ef migrations add vc_issuer_init
 ```
 
 ### Powershell
 
 ```
-Add-Migration "vaccine_vc_issuer_init"
+Add-Migration "vc_issuer_init"
 ```
 
 ## Running Migrations
@@ -139,7 +139,9 @@ Add-Migration "vaccine_vc_issuer_init"
 ```
 dotnet restore
 
-dotnet ef database update --context VaccineCredentialsIssuerMattrContext
+dotnet ef database update --context CountyResidenceDataMattrContext
+
+dotnet ef database update --context EidDataMattrContext
 ```
 
 ### Powershell
@@ -180,6 +182,8 @@ https://www.evernym.com/blog/zero-knowledge-proofs/
 https://www.lfph.io/wp-content/uploads/2021/02/Verifiable-Credentials-Flavors-Explained.pdf
 
 https://anonyome.com/2020/06/decentralized-identity-key-concepts-explained/
+
+https://techcommunity.microsoft.com/t5/identity-standards-blog/advancing-privacy-with-zero-knowledge-proof-credentials/ba-p/1441554
 
 # Mattr.Global instructions 
 
