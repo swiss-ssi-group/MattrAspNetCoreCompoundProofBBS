@@ -76,8 +76,9 @@
     });
 
     connection.start().then(function () {
-        //console.log(connection.connectionId);
-        const base64ChallengeId = $("#base64ChallengeId").val();
+        console.log(connection.connectionId);
+        const base64ChallengeId = $("#Base64ChallengeId").val();
+        console.warn("base64ChallengeId: " + base64ChallengeId);
 
         if (base64ChallengeId) {
             console.log(base64ChallengeId);
